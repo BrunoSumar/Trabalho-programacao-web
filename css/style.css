@@ -1,12 +1,15 @@
-/* paleta #e006a5 #9614d6 #6fbeff #182246 */
+/*
+    paleta #e006a5 #9614d6 #6fbeff #182246 #121933
+*/
 body {
   margin: 0;
   padding: 0;
-  background-color:  rgba(160, 34, 70, 1);
-  background-image: linear-gradient(180deg, rgba(194, 16, 163, 0.4) -20%, rgba(24, 34, 70, 1) 35%);
+  background-color:  rgba(17, 25, 51, 1);
+  background-image: linear-gradient(179.8deg, rgba(174, 16, 143, 0.4) -25%, #121933 37%);
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #sidebar {
@@ -36,7 +39,7 @@ body {
     border-radius: .5em;
     max-width: 700px;
     min-width: 430px;
-    background-color:  #182246;
+    background-color:  #172144;
     padding: 40px;
 }
 
@@ -47,12 +50,10 @@ body {
 
 .gradient-rosa {
   /* background: linear-gradient(50deg, rgba(150, 20, 214, 1) 0%, rgba(224, 6, 165, 1) 70%); */
-  background-color: rgba(150, 20, 214, 1);
   background: linear-gradient(47deg,rgba(150, 20, 214, 1) -1%, rgba(224, 6, 165, 1) 60%, #FFCC70 115%);
 }
 
 .gradient-azul/*? n sei q cor é essa  */{
-    background: rgb(150,20,214);
     background: linear-gradient(47deg, rgba(150,20,214,1) 0%, rgba(111,190,255,1) 60%, rgba(111,255,200,1) 115%);
 }
 
