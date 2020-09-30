@@ -2,7 +2,11 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(180deg, rgba(194, 16, 163, 1) 0%, rgba(24, 34, 70, 1) 30%);
+  background-color:  rgba(160, 34, 70, 1);
+  background-image: linear-gradient(180deg, rgba(194, 16, 163, 0.4) -20%, rgba(24, 34, 70, 1) 35%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
 }
 
 #sidebar {
@@ -14,8 +18,6 @@ body {
   margin: 10px 20px;
 }
 
-.conteudo {}
-
 #login {
   background: linear-gradient(red, blue);
 }
@@ -24,8 +26,38 @@ body {
   background: rgba(255, 255, 255, 0);
 }
 
+.paddingTop{
+    padding-top: 6rem;
+}
+
+.caixa {
+    height: 60vh;
+    margin:5vh 10%;
+    border-radius: .5em;
+    max-width: 700px;
+    min-width: 430px;
+    background-color:  #182246;
+    padding: 40px;
+}
+
+
+.inputLogin {
+    border-radius: 1.5em !important;
+}
+
 .gradient-rosa {
-  background: linear-gradient(45deg, rgba(150, 20, 214, 1) 0%, rgba(224, 6, 165, 1) 70%);
+  /* background: linear-gradient(50deg, rgba(150, 20, 214, 1) 0%, rgba(224, 6, 165, 1) 70%); */
+  background-color: rgba(150, 20, 214, 1);
+  background: linear-gradient(47deg,rgba(150, 20, 214, 1) -1%, rgba(224, 6, 165, 1) 60%, #FFCC70 115%);
+}
+
+.gradient-azul/*? n sei q cor é essa  */{
+    background: rgb(150,20,214);
+    background: linear-gradient(47deg, rgba(150,20,214,1) 0%, rgba(111,190,255,1) 60%, rgba(111,255,200,1) 115%);
+}
+
+.borderless {
+    border: 0 !important;
 }
 
 .nav-item {
