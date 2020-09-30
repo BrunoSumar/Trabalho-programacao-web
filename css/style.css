@@ -1,0 +1,50 @@
+/* paleta #e006a5 #9614d6 #6fbeff #182246 */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, rgba(194, 16, 163, 1) 0%, rgba(24, 34, 70, 1) 30%);
+}
+
+#sidebar {
+  height: 100vh;
+  background-color: #182246;
+}
+
+#botaoNav {
+  margin: 10px 20px;
+}
+
+.conteudo {}
+
+#login {
+  background: linear-gradient(red, blue);
+}
+
+#inputNome {
+  background: rgba(255, 255, 255, 0);
+}
+
+.gradient-rosa {
+  background: linear-gradient(45deg, rgba(150, 20, 214, 1) 0%, rgba(224, 6, 165, 1) 70%);
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-link {
+  padding: 5px 15% !important;
+}
+
+.nav-link:hover {
+  color: #e006a5 !important;
+}
+
+.nav-link i, svg, img {
+  margin: 10px
+}
+
+.relative-bottom {
+  position: absolute;
+  bottom: 0;
+}
