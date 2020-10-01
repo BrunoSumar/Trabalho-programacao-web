@@ -21,14 +21,6 @@ body {
   margin: 10px 20px;
 }
 
-#login {
-  background: linear-gradient(red, blue);
-}
-
-#inputNome {
-  background: rgba(255, 255, 255, 0);
-}
-
 .paddingTop{
     padding-top: 6rem;
 }
@@ -45,7 +37,14 @@ body {
 
 
 .inputLogin {
+    background: rgba(255, 255, 255, 0);
     border-radius: 1.5em !important;
+    border: 1px;
+}
+
+.inputLogin:focus {
+    background: rgba(255, 255, 255, 0.003);
+    border: 0;
 }
 
 .gradient-rosa {
