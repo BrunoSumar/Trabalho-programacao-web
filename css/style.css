@@ -1,5 +1,6 @@
 /*
-    paleta #e006a5 #9614d6 #6fbeff #182246 #121933
+    paleta #e006a5 #9614d6 #6fbeff fundo claro #182246
+    fundo escuro #121933
 */
 body {
   margin: 0;
@@ -32,6 +33,14 @@ form hr {
 
 #botaoNav {
   margin: 10px 20px;
+}
+
+.badge {
+    border-radius: 1.5em !important;
+}
+
+.link {
+    background-color: #182246;
 }
 
 .pTB{ /* padding top e bottom */
