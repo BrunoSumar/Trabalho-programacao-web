@@ -1,3 +1,4 @@
+/* Mais Um Gerenciador de Sites */
 /*
     paleta #e006a5 #9614d6 #6fbeff fundo claro #182246
     fundo escuro #121933
@@ -6,12 +7,13 @@ body {
   margin: 0;
   padding: 0;
   background-color:  rgba(17, 25, 51, 1);
-  background-image: linear-gradient(179.8deg, rgba(174, 16, 143, 0.4) -25%, #121933 37%);
+  background-image: linear-gradient(180deg, rgba(174, 16, 143, 0.4) -25%, #121933 37%);
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
+
 
 h3 {
     font-size: 2.4em;
@@ -23,7 +25,12 @@ hr {
 }
 
 form hr {
-    margin: 2em 0;
+    margin: 1.5em 0 2.5em 0;
+}
+
+img {
+    width: 50%;
+    float: left;
 }
 
 #sidebar {
@@ -45,12 +52,12 @@ form hr {
 }
 
 .pTB{ /* padding top e bottom */
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 .caixa {
-    height: 60vh;
+    height: 70vh;
     margin:5vh 10%;
     border-radius: .5em;
     max-width: 700px;
@@ -66,12 +73,13 @@ form hr {
 }
 
 .btn-login {
-    /* border-radius: .4em !important; */
-    margin-top: 0.5em;
+    margin-top: 2.3em;
+    font-size: 1.2em;
+    position: absolute;
 }
 
 .inputLogin:focus {
-    background: linear-gradient(47deg,rgba(1,1,1, 0) 35%, rgba(80,80,80, 0.3) 100%);
+    background: linear-gradient(47deg,rgba(1,1,1, 0) 35%, rgba(100,80,100, 0.3) 100%);
 }
 
 .gradient-rosa {
