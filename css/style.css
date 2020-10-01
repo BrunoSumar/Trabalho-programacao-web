@@ -12,6 +12,19 @@ body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
+h3 {
+    font-size: 2.4em;
+}
+
+hr {
+    background-color: white;
+    height: 1.2px;
+}
+
+form hr {
+    margin: 2em 0;
+}
+
 #sidebar {
   height: 100vh;
   background-color: #182246;
@@ -21,8 +34,9 @@ body {
   margin: 10px 20px;
 }
 
-.paddingTop{
+.pTB{ /* padding top e bottom */
     padding-top: 6rem;
+    padding-bottom: 6rem;
 }
 
 .caixa {
@@ -35,16 +49,19 @@ body {
     padding: 40px;
 }
 
-
 .inputLogin {
-    background: rgba(255, 255, 255, 0);
-    border-radius: 1.5em !important;
-    border: 1px;
+    background: rgba(55, 55, 55, 0);
+    /* border-radius: .7em !important; */
+    border-width: 2px;
+}
+
+.btn-login {
+    /* border-radius: .4em !important; */
+    margin-top: 0.5em;
 }
 
 .inputLogin:focus {
-    background: rgba(255, 255, 255, 0.003);
-    border: 0;
+    background: linear-gradient(47deg,rgba(1,1,1, 0) 35%, rgba(80,80,80, 0.3) 100%);
 }
 
 .gradient-rosa {
