@@ -44,10 +44,8 @@ img {
 }
 
 #sidebar {
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: #182246;
-  width: 20vw !important;
-  min-width: 275px;
 }
 
 #botaoNav {
@@ -192,4 +190,9 @@ img {
 
 .search-bar button:hover {
   color: #ffffff;
+}
+
+.content {
+  padding: 0px 10%;
+  background-color: #ffffff;
 }
