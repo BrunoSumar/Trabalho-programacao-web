@@ -50,13 +50,15 @@ img {
   margin: 10px 20px;
 }
 
-.card-body {
-    font-size: .82em;
+.short {
+    max-width: 85%;
+    opacity: .8;
+    line-height: normal;
 }
 
-.card-body p, span{
-    color: #fff;
-    opacity: .6;
+.card-body a{
+    color: #eee;
+    opacity: .9;
 }
 
 .card-header {
@@ -66,11 +68,10 @@ img {
 }
 
 .badge {
-    border-radius: .5em !important;
-    font-size: .6em;
+    border-radius: .4em !important;
 }
 
-.link {
+.conteudo {
     background-color: #182246;
 }
 
