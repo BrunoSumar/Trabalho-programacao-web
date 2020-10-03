@@ -12,7 +12,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-family: "Open Sans", Helvetica, sans-serif;
 }
 
 nav {
@@ -33,10 +33,7 @@ form hr {
   margin: 1.5em 0 2.5em 0;
 }
 
-img {
-  width: 50%;
-  float: left;
-}
+img {}
 
 .card a:hover {
   color: #e006a5;
@@ -52,15 +49,43 @@ img {
   margin: 10px 20px;
 }
 
-.short {
-    max-width: 85%;
-    opacity: .8;
-    line-height: normal;
+#trendings {
+  font-weight: lighter;
+  font-size: 40px;
+  font-family: "Open Sans light"
 }
 
-.card-body a{
-    color: #eee;
-    opacity: .9;
+#trendings i {
+  animation: color-change 3s infinite;
+}
+
+@keyframes color-change {
+  0% {
+    color: #ebff05;
+  }
+
+  25% {
+    color: #f48888;
+  }
+
+  75% {
+    color: #6fbeff;
+  }
+
+  100% {
+    color: #cdff6f;
+  }
+}
+
+.short {
+  max-width: 85%;
+  opacity: .8;
+  line-height: normal;
+}
+
+.card-body a {
+  color: #eee;
+  opacity: .9;
 }
 
 .card-header {
@@ -69,11 +94,26 @@ img {
 }
 
 .badge {
-    border-radius: .4em !important;
+  border-radius: .4em !important;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ebebeb;
+  font-size: .9em;
+  padding: 8px;
+}
+
+.badge-inner {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 2px;
+  margin: 5px;
+  color: #ffffff;
+  border-color: rgba(#969696, 0);
+  border-width: 0px;
+  border-radius: 50% !important;
+  border-style: solid;
 }
 
 .conteudo {
-    background-color: #182246;
+  background-color: #182246;
 }
 
 .pTB {
@@ -194,6 +234,25 @@ img {
 }
 
 .content {
-  padding: 0px 10%;
-  background-color: #ffffff;
+  padding: 5vh 5%;
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.text-rosa {
+  color: #e006a5;
+}
+
+#logotipoIndex {
+  height: 1em;
+}
+
+.trendingHeader {
+  font-weight: lighter;
+  font-family: "Open Sans";
+}
+
+.hrLight {
+  height: 0px;
 }
