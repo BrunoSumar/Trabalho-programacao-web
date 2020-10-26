@@ -2,7 +2,7 @@
 
 //fetch.php
 
-$api_url = "http://localhost/UFF/Trabalho-programacao-web1/API/test_api.php?action=fetch_all";
+$api_url = "http://localhost/Trabalho-programacao-web/API/test_api.php?action=fetch_all";
 
 $client = curl_init($api_url);
 
