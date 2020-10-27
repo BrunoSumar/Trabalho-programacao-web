@@ -90,7 +90,9 @@ img {}
 
 .card-header {
   font-size: 1.3em;
-  font-weight: 900;
+  font-family: "Open Sans";
+  font-weight: 600;
+  padding: 0.2rem 1.25rem;
 }
 
 .badge {
@@ -258,5 +260,5 @@ img {}
 }
 
 #myBookmarks {
-  background-color: rgb(50, 42, 102);
+  /* background-color: rgb(50, 42, 102); */
 }

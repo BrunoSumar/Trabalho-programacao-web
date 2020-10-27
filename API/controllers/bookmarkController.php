@@ -1,12 +1,9 @@
 <?php
 include('../api.php');
+header("Content-type: text/html; charset=utf-8");
 
 $api_object = new API();
 $data = 'Error';
-
-if ($_GET["action"] == 'fetch_all_bookmarks') {
-    //$data = $api_object->fetch_all_bookmarks();
-}
 
 if ($_GET["action"] == 'insert') {
     $form_data = array(
@@ -21,4 +18,6 @@ if ($_GET["action"] == 'fetch_all_bookmarks') {
     $data = $api_object->fetch_all_bookmarks();
 }
 
+//print_r($data);
+unset($api_object);
 echo json_encode($data);

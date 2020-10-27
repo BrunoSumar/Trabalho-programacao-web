@@ -11,25 +11,48 @@ curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($client);
 
 $result = json_decode($response);
-//print_r $result;
+//print_r($result);
 $output = '';
 
 if (count($result) > 0) {
     foreach ($result as $row) {
         $output .= '
-        <tr>
-        <td>'.$row->nickname.'</td>
-        <td>'.$row->email.$row->password.'</td>
-        <td><button type="button" name="edit" class="btn btn-warning btn-xs edit" id="'.$row->user_id.'">Edit</button></td>
-        <td><button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row->user_id.'">Delete</button></td>
-        </tr>
-        ';
+        <div class="card borderless conteudo text-light my-5">
+          <div class="card-header gradient-azul">
+            <!--<i class="far fa-bookmark"></i>-->
+            '.($row->is_private ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-lock-open"></i>').'
+            <span> '.$row->title.'</span>
+            <div class="float-right">
+                <button class="btn text-white-50 p-0" type="submit" data-toggle="modal" data-target="#bookmarkModal"><i class="far fa-edit"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img class="w-100" src="img/preview.png">
+              </div>
+              <div class="col">
+                <p class="card-text">'.$row->notes.'</p>
+                <span class="text-light font-weight-bold">URL:</span>
+                <a href="'.$row->url.'" class="">'.$row->url.'
+                    <button class="btn text-light" type="button" name="button" >
+                      <i class="fas fa-external-link-alt"></i>
+                    </button>
+                </a>
+
+              </div>
+            </div>
+            <h5>
+              <span class="badge badge-light">tags...</span>
+            </h5>
+          </div>
+        </div>';
     }
 } else {
     $output .= '
-     <tr>
-      <td colspan="4" align="center">No Data Found</td>
-     </tr>
+     <span style="text-align:center">
+      No Data Found
+     </span>
      ';
 }
 echo $output;

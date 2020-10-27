@@ -1,5 +1,5 @@
 <?php
-
+header("Content-type: text/html; charset=utf-8");
 class API
 {
     private $connect = '';
@@ -11,7 +11,7 @@ class API
     }
     public function database_connection()
     {
-        $this->connect = new PDO("mysql:host=localhost;dbname=mugs", "root", "");
+        $this->connect = new PDO("mysql:host=localhost;dbname=mugs;charset=utf8", "root", "");
     }
 
     public function fetch_all()
@@ -56,19 +56,18 @@ class API
         }
     }
 
-    public function update_bookmark($b_id, $u_id, $t_id, $creation_date, $title, $is_private, $notes, $url){ // temporario enquanto nao tem classe bookmark
+    public function update_bookmark($b_id, $u_id, $t_id, $creation_date, $title, $is_private, $notes, $url)
+    { // temporario enquanto nao tem classe bookmark
         $query =  "UPDATE mugs.bookmark
                    SET  user_id = ?, thumb_id = ?, creation_date = ?, title = ?, is_private = ?, notes = ?, url = ?
                    WHERE bookmark_id = ?;";
         echo $query;
         $statement = $this->connect->prepare($query);
         if ($statement->execute([ $u_id, $t_id, $creation_date, $title, $is_private, $notes, $url, $b_id])) {
-           $data[] = array(
+            $data[] = array(
             'success' => '1'
             );
-        }
-        else
-        {
+        } else {
             $data[] = array(
             'success' => '0'
             );
@@ -76,5 +75,4 @@ class API
 
         return $data;
     }
-
 }
