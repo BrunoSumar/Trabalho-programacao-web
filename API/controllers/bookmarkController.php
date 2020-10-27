@@ -1,6 +1,6 @@
 <?php
 include('../api.php');
-header("Content-type: text/html; charset=utf-8");
+header('Content-Type: application/json;charset=utf-8');
 
 $api_object = new API();
 $data = 'Error';

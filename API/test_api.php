@@ -1,7 +1,7 @@
 <?php
 
 //test_api.php
-
+header('Content-Type: application/json;charset=utf-8');
 include('api.php');
 
 $api_object = new API();
