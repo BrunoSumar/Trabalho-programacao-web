@@ -3,6 +3,7 @@
 class API
 {
     private $connect = '';
+    private $data = '';
 
     public function __construct()
     {
@@ -25,7 +26,8 @@ class API
         }
     }
 
-    public function fetch_all_bookmarks(){
+    public function fetch_all_bookmarks()
+    {
         $query =  "SELECT * FROM mugs.bookmark ORDER BY creation_date";
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
@@ -36,7 +38,8 @@ class API
         }
     }
 
-    public function fetch_bookmarks($title, $isPrivate, $url){
+    public function fetch_bookmarks($title, $isPrivate, $url)
+    {
         $query =  "SELECT * FROM mugs.bookmark WHERE ".
                    ($title !== null? " title LIKE \"%".$title."%\"":"").
                    ($isPrivate !== null? " is_private =".$isPrivate:"").

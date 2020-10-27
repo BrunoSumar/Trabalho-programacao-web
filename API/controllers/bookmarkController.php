@@ -1,14 +1,11 @@
 <?php
-
-//test_api.php
-
-include('api.php');
+include('../api.php');
 
 $api_object = new API();
 $data = 'Error';
 
-if ($_GET["action"] == 'fetch_all') {
-    $data = $api_object->fetch_all();
+if ($_GET["action"] == 'fetch_all_bookmarks') {
+    //$data = $api_object->fetch_all_bookmarks();
 }
 
 if ($_GET["action"] == 'insert') {
@@ -23,6 +20,5 @@ if ($_GET["action"] == 'insert') {
 if ($_GET["action"] == 'fetch_all_bookmarks') {
     $data = $api_object->fetch_all_bookmarks();
 }
-
 
 echo json_encode($data);

@@ -256,3 +256,7 @@ img {}
 .hrLight {
   height: 0px;
 }
+
+#myBookmarks {
+  background-color: rgb(50, 42, 102);
+}
