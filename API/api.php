@@ -2,6 +2,7 @@
 
 class API{
     private $connect = '';
+    private $data = '';
 
     public function __construct(){
         $this->database_connection();
@@ -48,4 +49,26 @@ class API{
             return $data;
         }
     }
+
+    public function update_bookmark($b_id, $u_id, $t_id, $creation_date, $title, $is_private, $notes, $url){ // temporario enquanto nao tem classe bookmark
+        $query =  "UPDATE mugs.bookmark
+                   SET  user_id = ?, thumb_id = ?, creation_date = ?, title = ?, is_private = ?, notes = ?, url = ?
+                   WHERE bookmark_id = ?;";
+        echo $query;
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute([ $u_id, $t_id, $creation_date, $title, $is_private, $notes, $url, $b_id])) {
+           $data[] = array(
+            'success' => '1'
+            );
+        }
+        else
+        {
+            $data[] = array(
+            'success' => '0'
+            );
+        }
+
+        return $data;
+    }
+
 }

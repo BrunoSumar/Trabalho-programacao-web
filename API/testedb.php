@@ -21,6 +21,9 @@ if($_GET["action"] == 'fetch_bookmarks')
  $data = $api_object->fetch_bookmarks(null,1,null);
 }
 
+if($_GET["action"] == 1){
+    $data = $api_object->update_bookmark(2, 1, NULL, "2025-10-08 20:09:17", "abasdc",	1, "adddsd", "4.com");
+}
 
 echo json_encode($data);
 
