@@ -8,6 +8,7 @@ class API
     public function __construct()
     {
         $this->database_connection();
+
     }
     public function database_connection()
     {
@@ -74,5 +75,33 @@ class API
         }
 
         return $data;
+    }
+
+    public function get_version(){
+        $query = "SELECT * FROM mugs.version;";
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute()) {
+            $data =  ($statement->fetch(PDO::FETCH_ASSOC));
+            return $data['atual'];
+        }
+        return null;
+
+    }
+
+    public function update_version(){
+           $version = rand();
+        $query = "Update mugs.version SET atual =".$version.";";
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute()) {
+            $data[] = array(
+            'success' => '1'
+            );
+        } else {
+            $data[] = array(
+            'success' => '0'
+            );
+        }
+        return $data;
+
     }
 }

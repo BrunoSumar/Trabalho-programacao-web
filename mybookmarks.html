@@ -146,7 +146,25 @@
 
   <!-- Optional JavaScript -->
   <script type="text/javascript">
+    let version = 0, atual = 1; 
     document.addEventListener("DOMContentLoaded", function(event) {
+        let version = null;
+        function is_update(){
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    atual = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "API/testedb.php?action=4", true);
+            xmlhttp.send();
+            if(version == atual)
+                return true;
+            
+            version = atual;
+            return false;
+                
+        }
       function listBookmars() {
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
@@ -160,10 +178,12 @@
 
       function loop() {
         setTimeout(function() {
-          console.log('.');
-          listBookmars();
+            if(!is_update()){
+                listBookmars();
+                console.log('.');
+            }
           loop();
-        }, 60000)
+        }, 600)
       }
 
       listBookmars();
