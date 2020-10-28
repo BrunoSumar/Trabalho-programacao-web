@@ -145,11 +145,10 @@
                     </button>
                 </div>
                 <div class="modal-body text-center" id="deleteModalBody">
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button id="deleteBookmark" type="submit" class="btn btn-danger" value="">Delete</button>
                 </div>
             </div>
         </div>
@@ -165,7 +164,9 @@
         document.addEventListener("DOMContentLoaded", function(event) {
 
             const addButton = document.getElementById('newBookmark');
+            const deleteButton = document.getElementById('deleteBookmark');
             const form = document.getElementById("bookmarkForm");
+
             let editButtons = document.getElementsByClassName("edit");
             let version = null;
 
@@ -210,6 +211,20 @@
                 };
                 xmlhttp.open("GET", "components/listBookmarks.php", true);
                 xmlhttp.send();
+            }
+
+            function deleteBookmark(id) {
+                const XHR = new XMLHttpRequest();
+                XHR.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(XHR.response);
+                    }
+                }
+                let data = `action=delete_by_id&id=${id}`;
+                XHR.open("POST", "application/validateBookmark.php");
+                XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                XHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                XHR.send(data);
             }
 
             async function loop() {
@@ -260,9 +275,8 @@
                             if (this.readyState == 4 && this.status == 200) {
                                 //console.log(XHR.response);
                                 const data = JSON.parse(XHR.response)[0];
-                                document.getElementById('deleteModalBody').innerHTML = `Deseja realmente deletar <br>"${data["title"]}"?`
-                                console.log(data);
-
+                                document.getElementById('deleteModalBody').innerHTML = `Deseja realmente deletar <br>"${data["title"]}"?`;
+                                deleteButton.value = data["bookmark_id"];
                             }
                         }
                         let data = `action=fetch_one_by_id&id=${this.id}`;
@@ -331,6 +345,12 @@
                 document.getElementById('hidden_id').value = null;
                 document.getElementById('isPublic').checked = true;
                 document.getElementById('action').value = 'insert';
+                return false;
+            };
+
+            deleteButton.onclick = function() {
+                deleteBookmark(this.value);
+                $('#deleteModal').modal('toggle')
                 return false;
             };
 

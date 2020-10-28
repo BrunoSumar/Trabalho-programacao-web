@@ -6,7 +6,7 @@
  - [x] Create
  - [x] Read
  - [x] Update
- - [ ] Delete
+ - [x] Delete
  - [ ] Confirmar se update,insert foi feito corretamente
  - [ ] Verificar pq ele faz duas requisições assim que abre a página
  - [ ] Setar as constantes no JS

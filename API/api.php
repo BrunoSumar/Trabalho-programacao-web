@@ -166,7 +166,7 @@ class API
     public function delete_bookmark($id){
         $query =    "DELETE FROM mugs.bookmark WHERE bookmark_id=".$id.";";
         $statement = $this->connect->prepare($query);
-        if ($statement->execute($update)) {
+        if ($statement->execute()) {
             $data[] = array(
             'success' => '1'
             );

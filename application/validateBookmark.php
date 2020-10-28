@@ -62,12 +62,34 @@ if (isset($_POST["action"])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
-            print_r($response);
+            //print_r($response);
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Updated';
                 } else {
                     echo 'Update error';
+                }
+            }
+            break;
+
+        case 'delete_by_id':
+            $form_data = array(
+                'id' => $_POST['id']
+            );
+            $api_url = "http://localhost/UFF/Trabalho-programacao-web1/API/controllers/bookmarkController.php?action=delete";
+            $client = curl_init($api_url);
+            curl_setopt($client, CURLOPT_POST, true);
+            curl_setopt($client, CURLOPT_POSTFIELDS, $form_data);
+            curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($client);
+            curl_close($client);
+            $result = json_decode($response, true);
+            //print_r($response);
+            foreach ($result as $keys => $values) {
+                if ($result[$keys]['success'] == '1') {
+                    echo 'Deleted';
+                } else {
+                    echo 'Delete error';
                 }
             }
             break;
