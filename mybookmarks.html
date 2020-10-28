@@ -119,6 +119,9 @@
                                 <label class="custom-control-label" for="isPublic">Public</label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <p id="creation_date" for="message-text" class="bookmarkForm"></p>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -202,11 +205,18 @@
                         const XHR = new XMLHttpRequest();
                         XHR.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
-                                console.log(XHR.response);
+                                //console.log(XHR.response);
+                                const data = JSON.parse(XHR.response)[0];
+                                document.getElementById('modalTitle').innerHTML = '<i class="far fa-edit"></i> Edit Bookmark';
+                                document.getElementById('titleBookmark').value = data['title'];
+                                document.getElementById('notesBookmark').value = data['notes'];
+                                document.getElementById('urlBookmark').value = data['url'];
+                                document.getElementById('hidden_id').value = data['bookmark_id'];
+                                document.getElementById('creation_date').innerHTML = `<b>Create:</b> ${data['creation_date']}`;
+                                document.getElementById('action').value = 'update';
                             }
                         }
-                        let data = `action=update&id=${this.id}`;
-
+                        let data = `action=fetch_one_by_id&id=${this.id}`;
                         XHR.open("POST", "application/validateBookmark.php");
                         XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         XHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -266,6 +276,7 @@
 
             addButton.onclick = function() {
                 //console.log('add');
+                document.getElementById('creation_date').innerHTML = null;
                 document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Bookmark';
                 document.getElementById('action').value = 'insert';
                 return false;

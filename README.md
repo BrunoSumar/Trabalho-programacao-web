@@ -5,10 +5,11 @@
 #### Tasks
  - [x] Create
  - [x] Read
- - [ ] Update
+ - [x] Update
  - [ ] Delete
  - [ ] Verificar pq ele faz duas requisições assim que abre a página
  - [ ] Na página "API/testedb.php?action=4"
  - [ ] Validar Form (Vazio, caracteres especiais...)
  - [ ] API -> Model
  - [ ] Atualizar somente com os novos itens
+ - [ ] Melhorar a verrificação
