@@ -32,7 +32,9 @@ if($_GET["action"] == 4){
 if($_GET["action"] == 5){
     $data = $api_object->update_version();
 }
-
+if($_GET["action"] == 6){
+    $data = $api_object->delete_bookmark($_GET["id"]);
+}
 
 echo json_encode($data);
 

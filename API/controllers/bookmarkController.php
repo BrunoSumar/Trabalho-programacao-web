@@ -41,6 +41,9 @@ if (isset($_GET["action"])) {
         $data = $api_object->fetch_one_by_id($_POST['idBookmark']);
     }
 
+    if ($_GET["action"] == 'delete') {
+        $data = $api_object->delete_bookmark($_POST['idBookmark']);
+    }
 }
 unset($api_object);
 echo json_encode($data);

@@ -162,4 +162,20 @@ class API
         }
         return $data;
     }
+
+    public function delete_bookmark($id){
+        $query =    "DELETE FROM mugs.bookmark WHERE bookmark_id=".$id.";";
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute($update)) {
+            $data[] = array(
+            'success' => '1'
+            );
+        } else {
+            $data[] = array(
+            'success' => '0'
+            );
+        }
+        $this->update_version();
+        return $data;
+    }
 }
