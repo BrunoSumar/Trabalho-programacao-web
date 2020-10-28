@@ -23,7 +23,7 @@ if (count($result) > 0) {
             '.($row->is_private ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-lock-open"></i>').'
             <span> '.$row->title.'</span>
             <div class="float-right">
-                <button class="btn text-white-50 p-0" type="submit" data-toggle="modal" data-target="#bookmarkModal"><i class="far fa-edit"></i></button>
+                <button id="'.$row->bookmark_id.'" class="btn text-white-50 p-0 edit" type="button" data-toggle="modal" data-target="#bookmarkModal"><i class="far fa-edit"></i></button>
             </div>
           </div>
           <div class="card-body">

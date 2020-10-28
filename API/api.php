@@ -1,21 +1,17 @@
 <?php
-class API
-{
+class API{
     private $connect = '';
     private $data = '';
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->database_connection();
-
     }
     public function database_connection()
     {
         $this->connect = new PDO("mysql:host=localhost;dbname=mugs;charset=utf8", "root", "");
     }
 
-    public function fetch_all()
-    {
+    public function fetch_all(){
         $query =  "SELECT * FROM mugs.users ORDER BY user_id";
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
@@ -26,8 +22,7 @@ class API
         }
     }
 
-    public function fetch_all_bookmarks()
-    {
+    public function fetch_all_bookmarks(){
         $query =  "SELECT * FROM mugs.bookmark ORDER BY creation_date";
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
@@ -38,8 +33,7 @@ class API
         }
     }
 
-    public function fetch_bookmarks($title, $isPrivate, $url)
-    {
+    public function fetch_bookmarks($title, $isPrivate, $url){
         $query =  "SELECT * FROM mugs.bookmark WHERE ".
                    ($title !== null? " title LIKE \"%".$title."%\"":"").
                    ($isPrivate !== null? " is_private =".$isPrivate:"").
@@ -61,7 +55,6 @@ class API
         $query =  "UPDATE mugs.bookmark
                    SET  user_id = ?, thumb_id = ?, creation_date = ?, title = ?, is_private = ?, notes = ?, url = ?
                    WHERE bookmark_id = ?;";
-        echo $query;
         $statement = $this->connect->prepare($query);
         if ($statement->execute([ $u_id, $t_id, $creation_date, $title, $is_private, $notes, $url, $b_id])) {
             $data[] = array(
@@ -75,6 +68,22 @@ class API
 
         return $data;
     }
+    public function insert_bookmark($inserts){
+        $query =  "INSERT INTO mugs.bookmark (user_id,thumb_id,title,is_private,notes,url)
+	               VALUES (?,?,?,?,?,?);";
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute($inserts)) {
+            $data[] = array(
+            'success' => '1'
+            );
+        } else {
+            $data[] = array(
+            'success' => '0'
+            );
+        }
+        $this->update_version();
+        return $data;
+    }
 
     public function get_version(){
         $query = "SELECT * FROM mugs.version;";
@@ -84,11 +93,10 @@ class API
             return $data['atual'];
         }
         return null;
-
     }
 
     public function update_version(){
-           $version = rand();
+        $version = rand();
         $query = "Update mugs.version SET atual =".$version.";";
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
@@ -101,6 +109,5 @@ class API
             );
         }
         return $data;
-
     }
 }

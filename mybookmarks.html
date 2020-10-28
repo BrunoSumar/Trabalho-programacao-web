@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/fa/css/all.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/toggle.css">
     <title>Home</title>
     <title></title>
 </head>
@@ -76,34 +77,7 @@
         <div class="col-sm-10 content">
             <div class="col">
                 <div class="container-fluid text-light rounded-lg mt-5" id="myBookmarks">
-                    <div class="card borderless conteudo text-light my-3">
-                        <div class="card-header gradient-azul">
-                            <i class="far fa-bookmark"></i> Gatinho tocando piano
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-3">
-                                    <img class="w-100" src="img/preview.png">
-                                </div>
-                                <div class="col">
-                                    <p class="card-text">Descrição exemplo de exibição de link. Descrição exemplo de exibição de link. Descrição exemplo de exibição de link.</p>
-                                    <span class="text-light font-weight-bold">URL:</span>
-                                    <a href="https://www.youtube.com/watch?v=ZClyNpyjnCA" class="">"https://www.youtube.com/watch?v=ZClyNpyjnCA"</a>
 
-                                    <button class="btn text-light" type="button" name="button">
-                                        <i class="far fa-copy"></i>
-                                    </button>
-
-                                </div>
-                            </div>
-                            <h5>
-                                <span class="badge badge-light">video</span>
-                                <span class="badge badge-success">gato</span>
-                                <span class="badge badge-info">youtube</span>
-                                <span class="badge badge-warning">piano</span>
-                            </h5>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -126,16 +100,24 @@
                 <div class="modal-body bookmarkForm">
                     <form id="bookmarkForm" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control bookmarkForm" id="titleBookmark" required="">
+                            <input type="text" class="form-control bookmarkForm" id="titleBookmark" name="titleBookmark" required="" autocomplete="off">
                             <label class="bookmarkForm" for="titleBookmark">Title</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control bookmarkForm" id="notesBookmark" required="">
+                            <input type="text" class="form-control bookmarkForm" id="notesBookmark" name="notesBookmark" required="" autocomplete="off">
                             <label for="message-text" class="bookmarkForm">Notes</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control bookmarkForm" id="urlBookmark" required="">
+                            <input type="text" class="form-control bookmarkForm" id="urlBookmark" name="urlBookmark" required="" autocomplete="off">
                             <label for="message-text" class="bookmarkForm">URL</label>
+                        </div>
+                        <div class="form-group toogle">
+                            <!-- <span for="">Public</span> -->
+                            <!-- <input type="checkbox" id="isPublic" checked /><label for="isPublic">Private?</label> -->
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="isPublic" name="isPublic" checked>
+                                <label class="custom-control-label" for="isPublic">Public</label>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -152,17 +134,14 @@
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">
+        let version = 0,
+            atual = 1
         document.addEventListener("DOMContentLoaded", function(event) {
 
             const addButton = document.getElementById('newBookmark');
             const form = document.getElementById("bookmarkForm");
-
-            addButton.onclick = function() {
-                //console.log('add');
-                document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Bookmark';
-                document.getElementById('action').value = 'insert';
-                return false;
-            };
+            let editButtons = document.getElementsByClassName("edit");
+            let version = null;
 
             function sendData() {
                 const XHR = new XMLHttpRequest();
@@ -170,30 +149,37 @@
                 //console.log(FD);
                 XHR.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log('xxx');
                         console.log(XHR.response);
-                        console.log('xxx');
                     }
                 }
-                console.log(FD);
+                //console.log(FD);
                 XHR.open("POST", "application/validateBookmark.php");
-                XHR.send(JSON.stringify(FD));
+                XHR.send(FD);
             }
 
+            function is_update() {
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        atual = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "API/testedb.php?action=4", true);
+                xmlhttp.send();
+                if (version == atual)
+                    return true;
 
+                version = atual;
+                return false;
 
-            form.addEventListener("submit", function(event) {
-                event.preventDefault();
-                sendData();
-            });
-
-
+            }
 
             function listBookmars() {
                 let xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         document.getElementById("myBookmarks").innerHTML = this.responseText;
+                        onclickButtonsEdit();
                     }
                 };
                 xmlhttp.open("GET", "components/listBookmarks.php", true);
@@ -202,14 +188,97 @@
 
             async function loop() {
                 while (true) {
-                    await new Promise(_ => setTimeout(_, 10000));
-                    console.log('.');
-                    listBookmars();
+                    await new Promise(_ => setTimeout(_, 1000));
+                    if (!is_update()) {
+                        listBookmars();
+                        console.log('.');
+                    }
                 }
             }
 
-            addButton.click();
+            function onclickButtonsEdit() {
+                for (let i = 0; i < editButtons.length; i++) {
+                    editButtons[i].onclick = function() {
+                        const XHR = new XMLHttpRequest();
+                        XHR.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                console.log(XHR.response);
+                            }
+                        }
+                        let data = `action=update&id=${this.id}`;
 
+                        XHR.open("POST", "application/validateBookmark.php");
+                        XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        XHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                        XHR.send(data);
+
+                    };
+                }
+
+            }
+
+            //Vou analisar no futuro
+            {
+                function postAjax(url, data, success) {
+                    var params = typeof data == 'string' ? data : Object.keys(data).map(
+                        function(k) {
+                            return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+                        }
+                    ).join('&');
+
+                    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                    xhr.open('POST', url);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState > 3 && xhr.status == 200) {
+                            success(xhr.responseText);
+                        }
+                    };
+                    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.send(params);
+                    return xhr;
+                }
+                // example request
+                // postAjax("application/validateBookmark.php", 'p1=1&p2=Hello+World', function(data) {
+                //     console.log(data);
+                // });
+
+                // example request with data object
+                // postAjax("application/validateBookmark.php", {
+                //     p1: 1,
+                //     p2: 'Hello World'
+                // }, function(data) {
+                //     console.log(data);
+                // });
+
+            }
+
+            // let data1 = {
+            //     oi: 1,
+            //     oi2: 32
+            // };
+            // var params = typeof data1 == 'string' ? data1 : Object.entries(data1).map(
+            //     function(k) {
+            //         return encodeURIComponent(k[0]) + '=' + encodeURIComponent(k[1])
+            //     }
+            // ).join('&');
+            // console.log(params);
+
+            addButton.onclick = function() {
+                //console.log('add');
+                document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Bookmark';
+                document.getElementById('action').value = 'insert';
+                return false;
+            };
+
+
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                sendData();
+            });
+
+            //addButton.click();
             listBookmars();
             loop();
         });
