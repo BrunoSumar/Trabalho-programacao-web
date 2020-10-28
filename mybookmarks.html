@@ -144,7 +144,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="deleteModalBody">
+                <div class="modal-body text-center" id="deleteModalBody">
 
                 </div>
                 <div class="modal-footer">
@@ -205,6 +205,7 @@
                     if (this.readyState == 4 && this.status == 200) {
                         document.getElementById("myBookmarks").innerHTML = this.responseText;
                         onclickButtonsEdit();
+                        onclickButtonsDelete();
                     }
                 };
                 xmlhttp.open("GET", "components/listBookmarks.php", true);
@@ -250,7 +251,28 @@
 
             }
 
-            function
+            function onclickButtonsDelete() {
+                deleteButtons = document.getElementsByClassName("delete");
+                for (let i = 0; i < deleteButtons.length; i++) {
+                    deleteButtons[i].onclick = function() {
+                        const XHR = new XMLHttpRequest();
+                        XHR.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                //console.log(XHR.response);
+                                const data = JSON.parse(XHR.response)[0];
+                                document.getElementById('deleteModalBody').innerHTML = `Deseja realmente deletar <br>"${data["title"]}"?`
+                                console.log(data);
+
+                            }
+                        }
+                        let data = `action=fetch_one_by_id&id=${this.id}`;
+                        XHR.open("POST", "application/validateBookmark.php");
+                        XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        XHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                        XHR.send(data);
+                    }
+                }
+            }
 
             //Vou analisar no futuro
             {
@@ -317,6 +339,7 @@
             form.addEventListener("submit", function(event) {
                 event.preventDefault();
                 sendData();
+                addButton.click();
             });
 
             //addButton.click();
