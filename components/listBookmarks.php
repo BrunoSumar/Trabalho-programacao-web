@@ -24,6 +24,7 @@ if (count($result) > 0) {
             <span> '.$row->title.'</span>
             <div class="float-right">
                 <button id="'.$row->bookmark_id.'" class="btn text-white-50 p-0 edit" type="button" data-toggle="modal" data-target="#bookmarkModal"><i class="far fa-edit"></i></button>
+                <button id="'.$row->bookmark_id.'" class="btn text-white-50 p-0 delete" type="button" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i></button>
             </div>
           </div>
           <div class="card-body">

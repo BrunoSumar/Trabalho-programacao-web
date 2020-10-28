@@ -87,8 +87,7 @@ class API
         return $data;
     }
 
-    public function update_bookmark($update)
-    {
+    public function update_bookmark($update){
         $query =    "UPDATE mugs.bookmark
                     SET  thumb_id = ?, title = ?, is_private = ?, notes = ?, url = ?
                     WHERE bookmark_id = ?;";

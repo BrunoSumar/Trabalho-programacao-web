@@ -63,13 +63,13 @@ if (isset($_POST["action"])) {
             curl_close($client);
             $result = json_decode($response, true);
             print_r($response);
-            // foreach ($result as $keys => $values) {
-            //     if ($result[$keys]['success'] == '1') {
-            //         echo 'Updated';
-            //     } else {
-            //         echo 'Update error';
-            //     }
-            // }
+            foreach ($result as $keys => $values) {
+                if ($result[$keys]['success'] == '1') {
+                    echo 'Updated';
+                } else {
+                    echo 'Update error';
+                }
+            }
             break;
 
 
