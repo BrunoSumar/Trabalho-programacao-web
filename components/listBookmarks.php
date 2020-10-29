@@ -14,7 +14,7 @@ $result = json_decode($response);
 //print_r($result);
 $output = '';
 
-if (count($result) > 0) {
+if (is_countable($result) && count($result) > 0) {
     foreach ($result as $row) {
         $output .= '
         <div class="card borderless conteudo text-light my-5">
@@ -51,9 +51,11 @@ if (count($result) > 0) {
     }
 } else {
     $output .= '
-     <span style="text-align:center">
-      No Data Found
-     </span>
+    <div class="container" style="text-align: center;">
+         <span style="text-align:center">
+               Nenhum bookmark encontrado.
+         </span>
+     </div>
      ';
 }
 echo $output;
