@@ -6,7 +6,6 @@ $api_object = new API();
 $data = 'Error';
 
 if (isset($_GET["action"])) {
-
     if ($_GET["action"] == 'insert') {
         $form_data = array(
             1, //Id fixo temporário até termos um sistema de usuários

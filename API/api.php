@@ -87,7 +87,8 @@ class API
         return $data;
     }
 
-    public function update_bookmark($update){
+    public function update_bookmark($update)
+    {
         $query =    "UPDATE mugs.bookmark
                     SET  thumb_id = ?, title = ?, is_private = ?, notes = ?, url = ?
                     WHERE bookmark_id = ?;";
@@ -163,7 +164,8 @@ class API
         return $data;
     }
 
-    public function delete_bookmark($id){
+    public function delete_bookmark($id)
+    {
         $query =    "DELETE FROM mugs.bookmark WHERE bookmark_id=".$id.";";
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
