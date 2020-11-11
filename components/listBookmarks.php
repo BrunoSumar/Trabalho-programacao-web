@@ -1,18 +1,24 @@
 <?php
 
-//fetch.php
-
-$api_url = "http://localhost/UFF/Trabalho-programacao-web1/API/controllers/bookmarkController.php?action=fetch_all_bookmarks";
-
+$base_url = 'http://localhost/UFF/Trabalho-programacao-web1/';
+$api_url = $base_url."API/controllers/bookmarkController.php?action=fetch_all_bookmarks";
 $client = curl_init($api_url);
-
 curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-
 $response = curl_exec($client);
-
 $result = json_decode($response);
-//print_r($result);
 $output = '';
+
+function get_path($thumb_id)
+{
+    $api_url ="http://localhost/UFF/Trabalho-programacao-web1/API/controllers/thumbnailController.php?action=fetch_one_by_id&idThumb=$thumb_id";
+    $client = curl_init($api_url);
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($client);
+    $result = json_decode($response);
+    return(isset($result[0]->path_img)? 'http://localhost/UFF/Trabalho-programacao-web1/API/'.$result[0]->path_img : '../../img/preview.png');
+}
+// echo get_path(6);
+
 
 if (is_countable($result) && count($result) > 0) {
     foreach ($result as $row) {
@@ -30,12 +36,14 @@ if (is_countable($result) && count($result) > 0) {
           <div class="card-body">
             <div class="row">
               <div class="col-3">
-                <img class="w-100" src="img/preview.png">
+                <img class="w-100" src="'.get_path($row->thumb_id).'">
               </div>
               <div class="col">
                 <p class="card-text">'.$row->notes.'</p>
                 <span class="text-light font-weight-bold">URL:</span>
-                <a href="'.$row->url.'" class="">'.$row->url.'
+                <a href="'.
+                          ((substr($row->url, 0, 4) === 'http') ? $row->url:'http://'.$row->url)
+                        .'" class="" target="_blank">'.$row->url.'
                     <button class="btn text-light" type="button" name="button" >
                       <i class="fas fa-external-link-alt"></i>
                     </button>

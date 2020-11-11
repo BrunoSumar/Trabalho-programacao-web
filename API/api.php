@@ -106,18 +106,6 @@ class API
         return $data;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     public function insert_bookmark($inserts)
     {
         $query =  "INSERT INTO mugs.bookmark (user_id,thumb_id,title,is_private,notes,url)

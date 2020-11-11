@@ -51,7 +51,9 @@ if (isset($_POST["action"])) {
                 'title' => $_POST['titleBookmark'],
                 'notes' => $_POST['notesBookmark'],
                 'url' => $_POST['urlBookmark'],
-                'isPublic' => isset($_POST['isPublic']) ? 1:0
+                'isPublic' => isset($_POST['isPublic']) ? 1:0,
+                'thumb_id' => $_POST['thumb_id'] ,
+                
             );
             // print_r ($form_data);
             $api_url = "http://localhost/UFF/Trabalho-programacao-web1/API/controllers/bookmarkController.php?action=update";

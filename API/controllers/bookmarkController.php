@@ -1,15 +1,20 @@
 <?php
 include('../api.php');
+include('../models/thumbnailModel.php');
 header('Content-Type: application/json;charset=utf-8');
 
 $api_object = new API();
-$data = 'Error';
+$thumb_object = new Thumbnail();
+$data = ['Error'];
 
 if (isset($_GET["action"])) {
     if ($_GET["action"] == 'insert') {
+        $result = $thumb_object->create_insert_thumbnail($_POST['url']);
+        $thumb_id = $result[0]['success'] === '1' ? $result[0]['id'] : null;
+        
         $form_data = array(
             1, //Id fixo temporário até termos um sistema de usuários
-            null, // || de thumbs
+            $thumb_id, // || de thumbs
             $_POST['title'],
             $_POST['isPublic'] ? 0:1,
             $_POST['notes'],
@@ -21,7 +26,7 @@ if (isset($_GET["action"])) {
 
     if ($_GET["action"] == 'update') {
         $form_data = array(
-            null, //Id fixo temporário até termos um sistema de usuários
+            $_POST['thumb_id'],
             $_POST['title'],
             $_POST['isPublic'] ? 0:1,
             $_POST['notes'],
@@ -45,4 +50,5 @@ if (isset($_GET["action"])) {
     }
 }
 unset($api_object);
+unset($thumb_object);
 echo json_encode($data);

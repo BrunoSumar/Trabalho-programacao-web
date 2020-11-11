@@ -127,6 +127,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                         <input type="hidden" name="hidden_id" id="hidden_id" value="1">
+                        <input type="hidden" name="thumb_id" id="thumb_id" value="1">
                         <input type="hidden" name="action" id="action" value="">
                     </form>
                 </div>
@@ -251,6 +252,7 @@
                                 document.getElementById('notesBookmark').value = data['notes'];
                                 document.getElementById('urlBookmark').value = data['url'];
                                 document.getElementById('hidden_id').value = data['bookmark_id'];
+                                document.getElementById('thumb_id').value = data['thumb_id'];
                                 document.getElementById('creation_date').innerHTML = `<b>Create:</b> ${data['creation_date']}`;
                                 document.getElementById('action').value = 'update';
                             }

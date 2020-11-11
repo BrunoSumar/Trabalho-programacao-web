@@ -3,26 +3,26 @@ include '../models/thumbnailModel.php';
 header('Content-Type: application/json;charset=utf-8');
 
 $thumb_object = new Thumbnail();
-$data = 'Error';
+$data = ['Error'];
 
 if (isset($_GET["action"])) {
-    if ($_GET["action"] == 'create') {
-        if (isset($_GET['url'])) {
-            $url = filter_var($_GET['url'], FILTER_SANITIZE_URL);
-            
-            if (!(substr($url, 0, 4) === 'http')) {
-                $url = 'http://'.$url;
+    switch ($_GET["action"]) {
+        case 'create':
+            if (isset($_GET['url'])) {
+                $data = $thumb_object->create_insert_thumbnail($_GET['url']);
             }
-            if (filter_var($url, FILTER_VALIDATE_URL)) {
-                $data = $thumb_object->create_thumbnail($url);
-            } else {
-                $data = [];
-                $data[] = array(
-                    'success' => '0'
-                );
+            break;
+        case 'fetch_one_by_id':
+            if (isset($_GET['idThumb'])) {
+                $data = $thumb_object->fetch_one_by_id($_GET['idThumb']);
             }
-        }
+            break;
+        
+        default:
+            $data = ['Undefined Action'];
+            break;
     }
 }
-unset($thumb_object);
+
+// print_r($data);
 echo json_encode($data);
