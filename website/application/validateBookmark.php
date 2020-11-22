@@ -52,10 +52,10 @@ if (isset($_POST["action"])) {
                 'notes' => $_POST['notesBookmark'],
                 'url' => $_POST['urlBookmark'],
                 'isPublic' => isset($_POST['isPublic']) ? 1:0,
-                'thumb_id' => $_POST['thumb_id'] ,
+                'thumb_id' => isset($_POST['thumb_id'])? null:$_POST['thumb_id'] ,
                 
             );
-            // print_r ($form_data);
+            // print_r($form_data);
             $api_url = "http://localhost/UFF/Trabalho-programacao-web1/API/controllers/bookmarkController.php?action=update";
             $client = curl_init($api_url);
             curl_setopt($client, CURLOPT_POST, true);
@@ -64,7 +64,7 @@ if (isset($_POST["action"])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
-            //print_r($response);
+            // print_r($response);
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Updated';
@@ -86,7 +86,6 @@ if (isset($_POST["action"])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
-            //print_r($response);
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Deleted';

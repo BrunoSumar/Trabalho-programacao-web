@@ -15,7 +15,7 @@ function get_path($thumb_id)
     curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($client);
     $result = json_decode($response);
-    return(isset($result[0]->path_img)? 'http://localhost/UFF/Trabalho-programacao-web1/API/'.$result[0]->path_img : '../../img/preview.png');
+    return(isset($result[0]->path_img)? 'http://localhost/UFF/Trabalho-programacao-web1/API/'.$result[0]->path_img : 'img/preview.png');
 }
 // echo get_path(6);
 

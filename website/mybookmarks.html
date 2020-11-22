@@ -161,7 +161,7 @@
     <!-- Optional JavaScript -->
     <script type="text/javascript">
         let version = 0,
-            atual = 1
+            atual = null;
         document.addEventListener("DOMContentLoaded", function(event) {
 
             const addButton = document.getElementById('newBookmark');
@@ -191,9 +191,10 @@
                         atual = this.responseText;
                     }
                 };
-                xmlhttp.open("GET", "API/testedb.php?action=4", true);
+                xmlhttp.open("GET", "../API/testedb.php?action=4", true);
                 xmlhttp.send();
-                if (version == atual)
+
+                if (version === atual)
                     return true;
 
                 version = atual;
@@ -253,6 +254,7 @@
                                 document.getElementById('urlBookmark').value = data['url'];
                                 document.getElementById('hidden_id').value = data['bookmark_id'];
                                 document.getElementById('thumb_id').value = data['thumb_id'];
+                                document.getElementById('isPublic').checked = data['is_private'] === '1' ? false : true;
                                 document.getElementById('creation_date').innerHTML = `<b>Create:</b> ${data['creation_date']}`;
                                 document.getElementById('action').value = 'update';
                             }
@@ -365,10 +367,11 @@
             });
 
             //addButton.click();
-            listBookmars();
+            // listBookmars();
             loop();
         });
     </script>
+    <script type="text/javascript" src="js/routes.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery-3.5.1.slim.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
