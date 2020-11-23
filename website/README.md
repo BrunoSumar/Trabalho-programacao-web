@@ -5,7 +5,6 @@
 #### Tasks
  - [ ] Verificar pq ele faz duas requisições assim que abre a página
  - [ ] CRUD usuário
- - [ ] API validação em 2 etapas
  - [ ] Usar session para ver se está atualizado
  - [ ] Usar session para ver se o usuário está logado
  - [ ] Atualizar thumb se a url mudar
@@ -15,3 +14,4 @@
  - [ ] Confirmar para o usuário se update,insert foi feito corretamente
  - [ ] Validar Form (Vazio, caracteres especiais...)
  - [ ] API -> Model
+ - [x] API validação em 2 etapas

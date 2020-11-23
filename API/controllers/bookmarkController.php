@@ -26,14 +26,13 @@ if (isset($_GET["action"])) {
 
     if ($_GET["action"] == 'update') {
         $form_data = array(
-            $_POST['thumb_id'],
+            $_POST['thumb_id'] ? $_POST['thumb_id']:null,
             $_POST['title'],
             $_POST['isPublic'] ? 0:1,
             $_POST['notes'],
             $_POST['url'],
             $_POST['id']
         );
-        $data = $form_data;
         $data = $api_object->update_bookmark($form_data);
     }
 
