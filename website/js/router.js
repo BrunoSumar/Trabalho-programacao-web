@@ -20,7 +20,7 @@ class Router {
     init() {
         return this.routes.find(route => {
             let path = window.location.pathname;
-            if ('/website' + route.path === path) {
+            if ('/UFF/Trabalho-programacao-web1/website' + route.path === path) {
                 return true;
             }
             return false;
