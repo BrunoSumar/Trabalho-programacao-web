@@ -7,34 +7,49 @@ $data = ['Error'];
 
 if (isset($_POST["action"])) {
     if ($_POST["action"] == 'create') {
-        $nickname = trim($_POST['nickname']);
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
+        $nick = isset($_POST['nickname'])?$_POST['nickname']:"";
+        $email = isset($_POST['email'])?$_POST['email']:"";
+        $pass = isset($_POST['password'])?$_POST['password']:"";
 
-        $data = $user_object->create_user($nickname, $email, $password);
-    }
+        if($user_object->is_ninckname_avaible($nick) && $user_object->is_email_avaible($email)){
+            if($user_object->validate_nickname($nick) && $user_object->validate_email($email) && $user_object->validate_password($password))
+                $data = $user_object->create_user($nick, $email, $pass);
+        }
+        else
+            $data = array('success' => '0');
+    }else
 
     if ($_POST["action"] == 'validate') {
-        $identifier =  trim($_POST['identifier']);
-        $password = trim($_POST['password']);
+        $id= isset($_POST['identifier'])?$_POST['identifier']:"";
+        $pass = isset($_POST['password'])?$_POST['password']:"";
 
-        if($id = filter_var($identifier, FILTER_VALIDATE_EMAIL)){
-            $data = $user_object->create_validate_by_email($id, $password);
-        }else{
-            $data = $user_object->create_validate_by_nick($identifier, $password);
-        }
-    }
+        if($user_object->validate_password($pass)){
+            if($user_object->validate_email($id)){
+                $data = $user_object->create_validate_by_email($id, $password);
+            }else
+            if($user_object->validate_nickname($id)){
+                $data = $user_object->create_validate_by_nick($id, $password);
+            }
+        }else
+            $data = array('success' => '0');
+    }else
 
     if ($_POST["action"] == 'check_nick') {
-        $nickname = $_POST['nickname'];
+        $nick = isset($_POST['nickname'])?$_POST['nickname']:"";
 
-        $data = $user_object->is_nickname_avaible($nickname);
-    }
+        if($user_object->is_nickname_avaible($nickname))
+            $data = array('success' => '1');
+        else
+            $data = array('success' => '0');
+    }else
 
     if ($_POST["action"] == 'check_email') {
-        $email = $_POST['email'];
+        $email= isset($_POST['email'])?$_POST['email']:"";
 
-        $data = $user_object->is_email_avaible($email);
+        if($user_object->is_email_avaible($email))
+            $data = array('success' => '1');
+        else
+            $data = array('success' => '0');
     }
 
 }

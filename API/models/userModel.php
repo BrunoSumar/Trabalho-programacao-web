@@ -68,4 +68,28 @@ class User
          }
          return false;
     }
+
+    public function validate_nickname($nick){
+        if(preg_match('/^[a-zA-Z][a-zA-Z0-9]{5,49}$/',$nick)){
+        //Sequencia de min 6 max 50 caracteres alfanumericos começando com uma letra
+           return true;
+        }
+        return false;
+    }
+
+    public function validate_email($email){
+        if(strlen($email)>=6 && strlen($email)<=50 && filter_var($email, FILTER_VALIDATE_EMAIL)){
+        //sequencia de min 6 max 50 caracteres e email valido
+           return true;
+        }
+        return false;
+    }
+
+    public function validate_password($pass){
+        if(preg_match('/^[.]{6,50}$/',$pass)){
+        //sequencia de min 6 max 50 caracteres
+           return true;
+        }
+        return false;
+    }
 }
