@@ -1,7 +1,8 @@
 RewriteEngine On
 
-RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond $1 !^(svg|img|css|js|components|application|API)
+#RewriteCond $1 !^(svg|img|css|js|components|application)
 
-RewriteRule (.*)  index.html [QSA]
+
+RewriteRule (.*)  index.php?url=$1 [QSA]

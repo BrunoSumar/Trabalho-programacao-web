@@ -12,5 +12,5 @@ var routes = [{
 
 router = new Router(routes);
 router.addRoute('name', '/mybookmark', 'teste');
-console.log(router.init());
+// console.log(router.init());
 // console.log(router);
