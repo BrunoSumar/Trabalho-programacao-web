@@ -3,6 +3,8 @@
 define('INDEX_LOAD',1);
 $routeFile = '';
 
+// Inicia sessão
+include_once("./components/sessionManager.php");
 
 // Pega as possíveis rotas do GET
 define('ARGS_URL', explode("/", isset($_GET["url"]) ? $_GET["url"] : "home"));
