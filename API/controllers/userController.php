@@ -11,7 +11,7 @@ if (isset($_POST["action"])) {
         $email = isset($_POST['email'])?$_POST['email']:"";
         $pass = isset($_POST['password'])?$_POST['password']:"";
 
-        if($user_object->is_ninckname_avaible($nick) && $user_object->is_email_avaible($email)){
+        if($user_object->is_nickname_avaible($nick) && $user_object->is_email_avaible($email)){
             if($user_object->validate_nickname($nick) && $user_object->validate_email($email) && $user_object->validate_password($password))
                 $data = $user_object->create_user($nick, $email, $pass);
         }
@@ -25,13 +25,20 @@ if (isset($_POST["action"])) {
 
         if($user_object->validate_password($pass)){
             if($user_object->validate_email($id)){
-                $data = $user_object->create_validate_by_email($id, $password);
+                if($user_object->validate_user_by_email($id, $pass))
+                    $data = array('success' => '1');
             }else
             if($user_object->validate_nickname($id)){
-                $data = $user_object->create_validate_by_nick($id, $password);
+                if($user_object->validate_user_by_nick($id, $pass))
+                    $data = array('success' => '1');
             }
-        }else
+        }
+        if(isset($data['success'])){
+
+        }
+        else
             $data = array('success' => '0');
+
     }else
 
     if ($_POST["action"] == 'check_nick') {

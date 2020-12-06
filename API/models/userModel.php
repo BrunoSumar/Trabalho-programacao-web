@@ -86,7 +86,7 @@ class User
     }
 
     public function validate_password($pass){
-        if(preg_match('/^[.]{6,50}$/',$pass)){
+        if(preg_match('/^.{6,50}$/',$pass)){
         //sequencia de min 6 max 50 caracteres
            return true;
         }
