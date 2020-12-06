@@ -145,6 +145,13 @@ img {}
     font-size: 1.2em;
 }
 
+.btn-registro {
+    margin-top: 1.5em;
+    font-size: 1.2em;
+}
+
+}
+
 .inputLogin:focus {
     background: linear-gradient(47deg, rgba(1, 1, 1, 0) 35%, rgba(100, 80, 100, 0.3) 100%);
 }
