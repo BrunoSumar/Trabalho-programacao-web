@@ -33,8 +33,8 @@ if (isset($_POST["action"])) {
                     $data = array('success' => '1');
             }
         }
-        if(isset($data['success'])){
-
+        if(isset($data['success'])){//mudar o retorno do api e verificar aqui
+            $s['loginNonce'] = md5(time()); //hash para verificação em duas etapas
         }
         else
             $data = array('success' => '0');
