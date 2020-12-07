@@ -12,7 +12,7 @@ if (isset($_POST["action"])) {
         $pass = isset($_POST['password'])?$_POST['password']:"";
 
         if($user_object->is_nickname_avaible($nick) && $user_object->is_email_avaible($email)){
-            if($user_object->validate_nickname($nick) && $user_object->validate_email($email) && $user_object->validate_password($password))
+            if($user_object->validate_nickname($nick) && $user_object->validate_email($email) && $user_object->validate_password($pass))
                 $data = $user_object->create_user($nick, $email, $pass);
         }
         if(!isset($data['success']))

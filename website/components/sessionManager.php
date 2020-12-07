@@ -5,7 +5,6 @@ if(!(defined('INDEX_LOAD') && INDEX_LOAD == 1)) // Verifica se chamada veio de i
 
 // Inicia sessão
 session_start();
-$s = $_SESSION;
 
 /*/
  * Variáveis de sessão
@@ -17,8 +16,8 @@ $s = $_SESSION;
  *
 /*/
 
-if(!isset($s['logged']) || $s['logged']=false){
-    $s['logged']=false;
-    $s['id']=null;
+if(!isset($_SESSION['logged']) || $_SESSION['logged']=false){
+    $_SESSION['logged']=false;
+    $_SESSION['id']=null;
 }
 

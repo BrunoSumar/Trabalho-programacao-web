@@ -18,16 +18,7 @@ if (is_countable(ARGS_URL) && count(ARGS_URL)==0 || ARGS_URL == "home") {
 
 // Chama o respectivo controller
 if (is_countable(ARGS_URL) && count(ARGS_URL) > 0) {
-    switch(ARGS_URL[0]){
-        case 'application':
-            $routeFile.= "application/".ARGS_URL[1];
-            break;
-        case 'components':
-            $routeFile.= "components/".ARGS_URL[1];
-            break;
-        default:
-            $routeFile .= "controllers/".ARGS_URL[0].".php";
-    }
+    $routeFile .= "controllers/".ARGS_URL[0].".php";
 }
 
 

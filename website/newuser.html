@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/UFF/Trabalho-programacao-web1/website/css/fa/css/all.css">
     <link rel="stylesheet" href="/UFF/Trabalho-programacao-web1/website/css/style.css">
     <link rel="stylesheet" href="/UFF/Trabalho-programacao-web1/website/css/toggle.css">
-    <title>Tela de login</title>
+    <title>Criar cadastro</title>
 </head>
 
 <body class="vh-100 vw-100">
@@ -29,46 +29,49 @@
             <hr>
             <div class="container  h-50 text-center">
               <p>
-                Explore, salve, compartilhe <span class="text-rosa">centenas</span> de links cadastrados por nossos usuários!
+                Já tem uma conta no <span class="text-rosa">MUGS</span>?
               </p>
-              <p>Caso ainda não tenha uma conta considere se registrar para aproveitar ao máximo o <span class="text-rosa">MUGS</span>.</p>
-              <button class="btn btn-block gradient-azul borderless text-light font-weight-bold p-2 btn-registro" type="button">Registre-se</button>
-
-                        </div>
-                    </div>
-                </div>
+                <button class="btn btn-block gradient-rosa borderless text-light font-weight-bold  p-2 " type="button">Fazer login</button>
+              <p style="margin-top:2.1em">
+                Você também pode se cadastrar usando:
+              </p>
+                <i  class="fab fa-facebook-square fa-3x"></i>
+            </div>
+          </div>
+        </div>
 
 
         <div class="col-lg order-lg-last">
           <div class="caixa shadow-lg">
-              <h3>LOGIN</h3>
+              <h3>Criar cadastro</h3>
               <hr>
             <form id="logForm">
               <div class="form-group">
                 <label class="form-text" for="inputNome">Nome de usuário:</label>
-                <input type="text" class="form-control inputLogin" id="inputNome" name="identifier" placeholder="Nome de usuário ou E-mail">
+                <input type="text" class="form-control inputLogin" id="inputNome" name="nickname" placeholder="Digite seu nome de usuário">
+              </div>
+
+              <div class="form-group">
+                <label class="form-text" for="inputNome">E-Mail:</label>
+                <input type="text" class="form-control inputLogin" id="inputEmail" name="email" placeholder="Digite seu E-Mail">
               </div>
 
               <div class="form-group">
                 <label for="inputSenha">Senha:</label>
                 <input type="password" class="form-control inputLogin" id="inputSenha" name="password" placeholder="Digite sua senha">
-
               </div>
-            
+
               <div style="display:none" id="logFeedback" class="alert alert-danger"></div>
 
               <div class="form-group">
-                <button onclick="login()" class="btn btn-block gradient-rosa borderless text-light font-weight-bold  p-2 btn-login" type="button">Entrar</button>
+                <button onclick="login()" class="btn btn-block gradient-azul borderless text-light font-weight-bold  p-2 btn-login" type="button" id="btnLogin">Cadastrar-se</button>
               </div>
-              <input type="hidden" name="action" id="action" value="validate">
+              <input type="hidden" name="action" id="action" value="create">
             </form>
-            <hr>
-            <div><i  class="fab fa-facebook-square fa-3x"></i></div>
           </div>
         </div>
       </div>
     </div>
-
 
     <script type="text/javascript">
         const login = () => {
@@ -78,22 +81,24 @@
             const FD = new FormData(log);
             XHR.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(XHR.response);
                     let r = JSON.parse(XHR.response);
                     let p = document.getElementById('logFeedback');
-                    p.style = "";
+                    let b = document.getElementById('btnLogin');
+                    b.style = "margin-top:0;";
+                    p.style = "line-height:.9em";
                     if(r['success']==0){
-                        p.innerHTML = "Usuário ou senha inválidos.";
+                        p.innerHTML = "Falha ao criar conta tente novamente (tamanho mínimo = 6).";
                         p.className ="alert alert-danger";
                     }else{
-                        p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail.";
+                        p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail para confirmar seu login.";
                         p.className ="alert alert-success";
                     }
-                    console.log(r['success']==0);
                 }
             }
             XHR.open("POST", "application/validateLogin.php");
             XHR.send(FD);
+
+
         }
         
     </script>
