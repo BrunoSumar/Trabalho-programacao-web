@@ -43,7 +43,7 @@
           <div class="caixa shadow-lg">
               <h3>LOGIN</h3>
               <hr>
-            <form id="logForm">
+            <form id="logForm" onsubmit="login(); return false;">
               <div class="form-group">
                 <label class="form-text" for="inputNome">Nome de usuário:</label>
                 <input type="text" class="form-control inputLogin" id="inputNome" name="identifier" placeholder="Nome de usuário ou E-mail">
@@ -58,7 +58,7 @@
               <div style="display:none" id="logFeedback" class="alert alert-danger"></div>
 
               <div class="form-group">
-                <button onclick="login()" class="btn btn-block gradient-rosa borderless text-light font-weight-bold  p-2 btn-login" type="button">Entrar</button>
+                <button onclick="login()" type="submit" class="btn btn-block gradient-rosa borderless text-light font-weight-bold  p-2 btn-login" type="button">Entrar</button>
               </div>
               <input type="hidden" name="action" id="action" value="validate">
             </form>
@@ -78,7 +78,7 @@
             const FD = new FormData(log);
             XHR.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(XHR.response);
+                    // console.log(XHR.response);
                     let r = JSON.parse(XHR.response);
                     let p = document.getElementById('logFeedback');
                     p.style = "";
@@ -89,7 +89,6 @@
                         p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail.";
                         p.className ="alert alert-success";
                     }
-                    console.log(r['success']==0);
                 }
             }
             XHR.open("POST", "application/validateLogin.php");

@@ -45,7 +45,7 @@
           <div class="caixa shadow-lg">
               <h3>Criar cadastro</h3>
               <hr>
-            <form id="logForm">
+            <form id="logForm" onsubmit="login();return false;">
               <div class="form-group">
                 <label class="form-text" for="inputNome">Nome de usuário:</label>
                 <input type="text" class="form-control inputLogin" id="inputNome" name="nickname" placeholder="Digite seu nome de usuário">
@@ -64,7 +64,7 @@
               <div style="display:none" id="logFeedback" class="alert alert-danger"></div>
 
               <div class="form-group">
-                <button onclick="login()" class="btn btn-block gradient-azul borderless text-light font-weight-bold  p-2 btn-login" type="button" id="btnLogin">Cadastrar-se</button>
+                <button onclick="login()" class="btn btn-block gradient-azul borderless text-light font-weight-bold  p-2 btn-login" type="submit" id="btnLogin">Cadastrar-se</button>
               </div>
               <input type="hidden" name="action" id="action" value="create">
             </form>
