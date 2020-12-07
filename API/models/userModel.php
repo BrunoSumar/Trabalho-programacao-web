@@ -30,21 +30,23 @@ class User
          $statement = $this->connect->prepare($query);
          if ($statement->execute()){
             if($row = $statement->fetch(PDO::FETCH_ASSOC)){
-                return password_verify($senha, $row['password']);
+                if(password_verify($senha, $row['password']))
+                    return array('success'=>'1', 'id'=>$nickname,);
             }
          }
-         return false;
+         return array('success' => '0');
     }
 
     public function validate_user_by_email($email, $senha){
-        $query =  "SELECT password FROM mugs.users u WHERE u.email = \"$email\";";
+        $query =  "SELECT password, nickname FROM mugs.users u WHERE u.email = \"$email\";";
          $statement = $this->connect->prepare($query);
          if ($statement->execute()){
             if($row = $statement->fetch(PDO::FETCH_ASSOC)){
-                return password_verify($senha, $row['password']);
+                if(password_verify($senha, $row['password']))
+                    return array('success'=>'1','id'=>$row['nickname']);
             }
          }
-         return false;
+         return array('success' => '0');
     }
 
     public function is_nickname_avaible($nickname){

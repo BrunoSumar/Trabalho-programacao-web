@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/UFF/Trabalho-programacao-web1/website/css/fa/css/all.css">
     <link rel="stylesheet" href="/UFF/Trabalho-programacao-web1/website/css/style.css">
     <link rel="stylesheet" href="/UFF/Trabalho-programacao-web1/website/css/toggle.css">
-    <title>Home</title>
+    <title>MyBookmarks</title>
     <title></title>
 </head>
 
@@ -184,23 +184,23 @@
                 XHR.send(FD);
             }
 
-            function is_update() {
-                let xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        atual = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "../API/testedb.php?action=4", true);
-                xmlhttp.send();
+            // function is_update() {
+            //     let xmlhttp = new XMLHttpRequest();
+            //     xmlhttp.onreadystatechange = function() {
+            //         if (this.readyState == 4 && this.status == 200) {
+            //             atual = this.responseText;
+            //         }
+            //     };
+            //     xmlhttp.open("GET", "../API/testedb.php?action=4", true);
+            //     xmlhttp.send();
 
-                if (version === atual)
-                    return true;
+            //     if (version === atual)
+            //         return true;
 
-                version = atual;
-                return false;
+            //     version = atual;
+            //     return false;
 
-            }
+            // }
 
             function listBookmars() {
                 let xmlhttp = new XMLHttpRequest();
@@ -232,9 +232,10 @@
             async function loop() {
                 while (true) {
                     await new Promise(_ => setTimeout(_, 1000));
-                    if (!is_update()) {
-                        listBookmars();
+                    //if (!is_update())
+                    {
                         console.log('.');
+                        listBookmars();
                     }
                 }
             }

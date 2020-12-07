@@ -72,7 +72,6 @@
     <script type="text/javascript">
         const login = () => {
             let log = document.getElementById('logForm');
-            console.log(log);
 
             const XHR = new XMLHttpRequest();
             const FD = new FormData(log);
@@ -82,7 +81,7 @@
                     console.log(XHR.response);
                 }
             }
-            XHR.open("POST", "../API/controllers/userController.php");
+            XHR.open("POST", "application/validatelogin");
             XHR.send(FD);
 
 

@@ -15,7 +15,7 @@ if (isset($_POST["action"])) {
             if($user_object->validate_nickname($nick) && $user_object->validate_email($email) && $user_object->validate_password($password))
                 $data = $user_object->create_user($nick, $email, $pass);
         }
-        else
+        if(!isset($data['success']))
             $data = array('success' => '0');
     }else
 
@@ -25,20 +25,14 @@ if (isset($_POST["action"])) {
 
         if($user_object->validate_password($pass)){
             if($user_object->validate_email($id)){
-                if($user_object->validate_user_by_email($id, $pass))
-                    $data = array('success' => '1');
+                $data = $user_object->validate_user_by_email($id, $pass);
             }else
             if($user_object->validate_nickname($id)){
-                if($user_object->validate_user_by_nick($id, $pass))
-                    $data = array('success' => '1');
+                $data = $user_object->validate_user_by_nick($id, $pass);
             }
         }
-        if(isset($data['success'])){//mudar o retorno do api e verificar aqui
-            $s['loginNonce'] = md5(time()); //hash para verificação em duas etapas
-        }
-        else
+        if(!isset($data['success']))
             $data = array('success' => '0');
-
     }else
 
     if ($_POST["action"] == 'check_nick') {

@@ -11,15 +11,24 @@ define('ARGS_URL', explode("/", isset($_GET["url"]) ? $_GET["url"] : "home"));
 
 
 // Define o html padrão caso esteja no root ou não tenha o parâmetro URL
-if (count(ARGS_URL)==0 || ARGS_URL == "home") {
+if (is_countable(ARGS_URL) && count(ARGS_URL)==0 || ARGS_URL == "home") {
     $routeFile = "home.html";
 }
 
+
 // Chama o respectivo controller
 if (is_countable(ARGS_URL) && count(ARGS_URL) > 0) {
-    $routeFile .= "controllers/".ARGS_URL[0].".php";
+    switch(ARGS_URL[0]){
+        case 'application':
+            $routeFile.= "application/".ARGS_URL[1];
+            break;
+        case 'components':
+            $routeFile.= "components/".ARGS_URL[1];
+            break;
+        default:
+            $routeFile .= "controllers/".ARGS_URL[0].".php";
+    }
 }
-
 
 
 // Chama o arquivo caso exista, caso não retorna o html padrão
