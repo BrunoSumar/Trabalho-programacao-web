@@ -91,6 +91,7 @@ if (isset($_POST["action"])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
+            //print_r($response);
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Deleted';
@@ -102,7 +103,7 @@ if (isset($_POST["action"])) {
             break;
 
         case 'is_update':
-            if(!isset($_SESSION['MBversion'])){
+            if (!isset($_SESSION['MBversion'])) {
                 $_SESSION['MBversion']=md5(1.3*time());
             }
             echo $_SESSION['MBversion'];

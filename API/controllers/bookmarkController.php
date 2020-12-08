@@ -53,7 +53,7 @@ if (isset($_GET["action"])) {
     }
 
     if ($_GET["action"] == 'delete') {
-        $data = $api_object->delete_bookmark($_POST['id']);
+        $data = $api_object->delete_bookmark([$_POST['id']]);
     }
 }
 unset($api_object);

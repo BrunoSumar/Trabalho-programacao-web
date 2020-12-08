@@ -38,7 +38,7 @@
         </div>
     </nav>
 
- <div class="row" style="margin:0px;">
+    <div class="row" style="margin:0px;">
         <div class="col-sm-2 shadow-lg" style="padding:0px;" id="sidebar">
             <div class="row" style="margin:0px;">
                 <img src="/UFF/Trabalho-programacao-web1/website/svg/isologo.svg" class="card-img-top py-4 px-4 m-0" alt="..." style="display:block">
@@ -55,7 +55,7 @@
                             Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="trending" class="nav-link text-white-50" ><i class="fas fa-search"></i> Search</a>
+                        <a href="trending" class="nav-link text-white-50"><i class="fas fa-search"></i> Search</a>
                     </li>
                     <li class="nav-item">
                         <a href="mybookmarks" class="nav-link text-white-50" href="#"><i class="fas fa-bookmark"></i> My Bookmarks</a>
@@ -69,7 +69,7 @@
                             Profile</a>
                     </li>
                     <li class="nav-item relative-bottom mb-5">
-                        <a href="checkout" class="nav-link text-white-50" ><i class="fas fa-sign-out-alt"></i> Exit</a>
+                        <a href="checkout" class="nav-link text-white-50"><i class="fas fa-sign-out-alt"></i> Exit</a>
                     </li>
                 </ul>
             </div>
@@ -180,7 +180,7 @@
                 //console.log(FD);
                 XHR.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(XHR.response);
+                        //console.log(XHR.response);
                     }
                 }
                 XHR.open("POST", "application/validateBookmark.php");
@@ -286,7 +286,7 @@
                         const XHR = new XMLHttpRequest();
                         XHR.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
-                                console.log(XHR.response);
+                                //console.log(XHR.response);
                                 const data = JSON.parse(XHR.response)[0];
                                 document.getElementById('deleteModalBody').innerHTML = `Deseja realmente deletar <br>"${data["title"]}"?`;
                                 deleteButton.value = data["bookmark_id"];

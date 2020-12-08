@@ -53,7 +53,7 @@ class API
     //Retorna os dados de um bookmark pelo ID
     public function fetch_one_by_id($id)
     {
-        $data = '';
+        $data = [];
         $id = array($id);
         $query =  "SELECT * FROM mugs.bookmark WHERE bookmark_id = ?";
         $statement = $this->connect->prepare($query);
@@ -169,9 +169,9 @@ class API
 
     public function delete_bookmark($id)
     {
-        $query =    "DELETE FROM mugs.bookmark WHERE bookmark_id=".$id.";";
+        $query = "DELETE FROM mugs.bookmark WHERE bookmark_id= ?;";
         $statement = $this->connect->prepare($query);
-        if ($statement->execute()) {
+        if ($statement->execute($id)) {
             $data[] = array(
             'success' => '1'
             );
