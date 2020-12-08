@@ -26,12 +26,12 @@ class User
     }
 
     public function validate_user_by_nick($nickname, $senha){
-        $query =  "SELECT password FROM mugs.users u WHERE u.nickname = \"$nickname\";";
+        $query =  "SELECT password, email FROM mugs.users u WHERE u.nickname = \"$nickname\";";
          $statement = $this->connect->prepare($query);
          if ($statement->execute()){
             if($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 if(password_verify($senha, $row['password']))
-                    return array('success'=>'1', 'id'=>$nickname,);
+                    return array('success'=>'1', 'id'=>$nickname, 'email'=>$row['email']);
             }
          }
          return array('success' => '0');
@@ -43,7 +43,7 @@ class User
          if ($statement->execute()){
             if($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 if(password_verify($senha, $row['password']))
-                    return array('success'=>'1','id'=>$row['nickname']);
+                    return array('success'=>'1','id'=>$row['nickname'], 'email'=>$email);
             }
          }
          return array('success' => '0');

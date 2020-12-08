@@ -32,11 +32,10 @@ class User
 
     public function fetch_newest_tags()
     {
-        $query =  "SELECT t.name as 'nome', sum(t.name) as 'quant'
+        $query =  "SELECT distinct t.name as 'nome', as 'quant'
                    FROM mugs.bookmark b inner join mugs.tag t
                    on b.bookmark_id = t.bookmark_id
                    WHERE b.is_private=0
-                   GROUP BY t.name
                    ORDER BY b.creation_date DESC
                    limit 0,10;";
         echo $query;
@@ -50,7 +49,25 @@ class User
         }
     }
 
-
+    public function fetch_week_tags()
+    {
+        $query =  "SELECT distinct t.name as 'nome', sum(t.name) as 'quant'
+                   FROM mugs.bookmark b inner join mugs.tag t
+                   on b.bookmark_id = t.bookmark_id
+                   WHERE b.is_private=0
+                   and b.creation_date < CURRENT_DATE-7
+                   ORDER BY b.creation_date DESC
+                   limit 0,10 ";
+        echo $query;
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute()) {
+            $data = null;
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
 
 
 
