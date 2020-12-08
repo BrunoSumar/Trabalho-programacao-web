@@ -24,6 +24,17 @@ class TAG
             return $data;
         }
     }
+    public function fetch_all_by_id($vars)
+    {
+        $query =  "SELECT * FROM mugs.tag WHERE mugs.tag.bookmark_id = ? ORDER BY tag_id";
+        $statement = $this->connect->prepare($query);
+        if ($statement->execute($vars)) {
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
 
     //Retorna os dados de um bookmark pelo ID
     public function fetch_one_by_id($id)

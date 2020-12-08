@@ -18,6 +18,22 @@ function get_path($thumb_id)
     $result = json_decode($response);
     return(isset($result[0]->path_img)? 'http://localhost/UFF/Trabalho-programacao-web1/API/'.$result[0]->path_img : 'img/preview.png');
 }
+
+
+function get_tags($bookmarkID)
+{
+    $api_url ="http://localhost/UFF/Trabalho-programacao-web1/API/controllers/tagController.php?action=fetch_all_by_id&idBookmark=$bookmarkID";
+    $client = curl_init($api_url);
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($client);
+    $result = json_decode($response);
+    $out = '';
+    foreach ($result as $key) {
+        $out .='<span class="badge badge-light"> '.$key->name.' </span> ';
+    }
+    return($out);
+}
+
 // echo get_path(6);
 
 
@@ -51,10 +67,9 @@ if (is_countable($result) && count($result) > 0) {
                 </a>
 
               </div>
-            </div>
-            <h5>
-              <!-- <span class="badge badge-light">tags...</span> -->
-            </h5>
+            </div><h5>
+            '.get_tags($row->bookmark_id).' </h5>
+            
           </div>
         </div>';
     }

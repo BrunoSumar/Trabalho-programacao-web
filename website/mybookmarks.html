@@ -165,7 +165,8 @@
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">
-        let version = -1,  update = 0;
+        let version = -1;
+        var update = 0;
 
         document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -221,25 +222,24 @@
                 while (true) {
                     await new Promise(_ => setTimeout(_, 500));
                     is_update();
-                    if (!update)
-                    {
+                    if (!update) {
                         console.log('.');
                         listBookmars();
                     }
                 }
             }
 
-            function is_update(){
+            function is_update() {
                 const XHR = new XMLHttpRequest();
                 XHR.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         let r = (XHR.response);
-                        console.log('a '+r);
-                        if(r==version)
+                        //console.log('a ' + r);
+                        if (r == version)
                             update = 1;
                         else
                             update = 0;
-                        version=r;
+                        version = r;
                     }
                 }
                 let data = `action=is_update`;
@@ -247,7 +247,7 @@
                 XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 XHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 XHR.send(data);
-                
+
             }
 
             function onclickButtonsEdit() {
@@ -289,7 +289,7 @@
                         const XHR = new XMLHttpRequest();
                         XHR.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
-                                //console.log(XHR.response);
+                                console.log(XHR.response);
                                 const data = JSON.parse(XHR.response)[0];
                                 document.getElementById('deleteModalBody').innerHTML = `Deseja realmente deletar <br>"${data["title"]}"?`;
                                 deleteButton.value = data["bookmark_id"];
