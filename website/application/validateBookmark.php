@@ -14,7 +14,6 @@ if (isset($_POST["action"])) {
                 'tags' => $_POST['tags'],
                 'isPublic' => isset($_POST['isPublic']) ? 1:0
             );
-            // print_r($form_data);
             $api_url = "http://localhost/UFF/Trabalho-programacao-web1/API/controllers/bookmarkController.php?action=insert";
             $client = curl_init($api_url);
             curl_setopt($client, CURLOPT_POST, true);
@@ -23,7 +22,8 @@ if (isset($_POST["action"])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
-            print_r($result);
+            print_r($response);
+            // print_r($result);
             
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
