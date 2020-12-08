@@ -40,6 +40,7 @@ if (isset($_POST['action'])) {
 
             if ($result['success'] == '1') {
                 $_SESSION['id'] = $result['id'];
+                $_SESSION['username'] = $result['username'];
                 $_SESSION['loginNonce'] = md5(time());
                 $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];
                 sendEmail($result['email'], $link);
@@ -65,7 +66,8 @@ if (isset($_POST['action'])) {
 
             
             if ($result['success'] == '1') {
-                $_SESSION['id'] = $_POST['nickname'];
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['username'] = $_POST['nickname'];
                 $_SESSION['loginNonce'] = md5(time());
                 $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];
                 sendEmail($result['email'], $link);
