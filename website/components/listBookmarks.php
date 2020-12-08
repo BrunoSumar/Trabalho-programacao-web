@@ -1,7 +1,7 @@
 <?php
-
+session_start();
 $base_url = 'http://localhost/UFF/Trabalho-programacao-web1/';
-$api_url = $base_url."API/controllers/bookmarkController.php?action=fetch_all_bookmarks";
+$api_url = $base_url."API/controllers/bookmarkController.php?action=fetch_all_bookmarks&id=".$_SESSION['id'];
 $client = curl_init($api_url);
 curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($client);

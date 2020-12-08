@@ -13,15 +13,15 @@ if (isset($_GET["action"])) {
         $thumb_id = $result[0]['success'] === '1' ? $result[0]['id'] : null;
         
         $form_data = array(
-            1, //Id fixo temporário até termos um sistema de usuários
+            $_POST['id'], //Id fixo temporário até termos um sistema de usuários
             $thumb_id, // || de thumbs
             $_POST['title'],
             $_POST['isPublic'] ? 0:1,
             $_POST['notes'],
             $_POST['url']
         );
-        $data = $form_data;
         $data = $api_object->insert_bookmark($form_data);
+        $data = $form_data;
     }
 
     if ($_GET["action"] == 'update') {
@@ -37,6 +37,7 @@ if (isset($_GET["action"])) {
     }
 
     if ($_GET["action"] == 'fetch_all_bookmarks') {
+        print_r();
         $data = $api_object->fetch_all_bookmarks();
     }
 
