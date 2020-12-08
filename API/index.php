@@ -1,3 +1,4 @@
+<?php header('Location: http://localhost/UFF/Trabalho-programacao-web1/website/login');?>
 <!DOCTYPE html>
 <html>
  <head>
@@ -179,4 +180,4 @@
 
 
 
-<?php //nada?>
+

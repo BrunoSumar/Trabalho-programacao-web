@@ -1,10 +1,12 @@
 <?php
 include('../api.php');
 include('../models/thumbnailModel.php');
+include('../models/tagModel.php');
 header('Content-Type: application/json;charset=utf-8');
 
 $api_object = new API();
 $thumb_object = new Thumbnail();
+$tag_object = new TAG();
 $data = ['Error'];
 
 if (isset($_GET["action"])) {
@@ -20,8 +22,14 @@ if (isset($_GET["action"])) {
             $_POST['notes'],
             $_POST['url']
         );
-        $data = $api_object->insert_bookmark($form_data);
         $data = $form_data;
+        $tags = explode(' ', $_POST['tags']);
+        $data = $api_object->insert_bookmark($form_data);
+        $bookmark_id = $data[0]['bookmark_id'];
+        // print_r($data[0]['bookmark_id']);
+        foreach ($tags as $tag) {
+            $data = $tag_object->insert_tag(array($bookmark_id,$tag));
+        }
     }
 
     if ($_GET["action"] == 'update') {
@@ -37,7 +45,7 @@ if (isset($_GET["action"])) {
     }
 
     if ($_GET["action"] == 'fetch_all_bookmarks') {
-        $data = $api_object->fetch_all_bookmarks($_GET['id']);
+        $data = $api_object->fetch_all_bookmarks_by_user([$_GET['id']]);
     }
 
     if ($_GET["action"] == 'fetch_one_by_id') {

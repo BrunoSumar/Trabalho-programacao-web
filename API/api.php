@@ -25,11 +25,11 @@ class API
         }
     }
 
-    public function fetch_all_bookmarks($user)
+    public function fetch_all_bookmarks()
     {
-        $query =  "SELECT * FROM mugs.bookmark where mugs.user_id = ? ORDER BY creation_date";
+        $query =  "SELECT * FROM mugs.bookmark ORDER BY creation_date";
         $statement = $this->connect->prepare($query);
-        if ($statement->execute($user)) {
+        if ($statement->execute()) {
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $data[] = $row;
             }
@@ -39,9 +39,9 @@ class API
 
     public function fetch_all_bookmarks_by_user($user)
     {
-        $query =  "SELECT * FROM mugs.bookmark WHERE ORDER BY creation_date";
+        $query =  "SELECT * FROM mugs.bookmark WHERE mugs.bookmark.user_id = ? ORDER BY creation_date";
         $statement = $this->connect->prepare($query);
-        if ($statement->execute()) {
+        if ($statement->execute($user)) {
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $data[] = $row;
             }
