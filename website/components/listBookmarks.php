@@ -6,6 +6,7 @@ $client = curl_init($api_url);
 curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($client);
 $result = json_decode($response);
+print_r($response);
 $output = '';
 
 function get_path($thumb_id)

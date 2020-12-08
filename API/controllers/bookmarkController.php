@@ -37,8 +37,7 @@ if (isset($_GET["action"])) {
     }
 
     if ($_GET["action"] == 'fetch_all_bookmarks') {
-        print_r();
-        $data = $api_object->fetch_all_bookmarks();
+        $data = $api_object->fetch_all_bookmarks($_GET['id']);
     }
 
     if ($_GET["action"] == 'fetch_one_by_id') {

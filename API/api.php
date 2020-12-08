@@ -25,11 +25,11 @@ class API
         }
     }
 
-    public function fetch_all_bookmarks()
+    public function fetch_all_bookmarks($user)
     {
-        $query =  "SELECT * FROM mugs.bookmark ORDER BY creation_date";
+        $query =  "SELECT * FROM mugs.bookmark where mugs.user_id = ? ORDER BY creation_date";
         $statement = $this->connect->prepare($query);
-        if ($statement->execute()) {
+        if ($statement->execute($user)) {
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $data[] = $row;
             }
@@ -129,7 +129,7 @@ class API
         if ($statement->execute($inserts)) {
             $data[] = array(
             'success' => '1',
-            'bookmark_id' =>  $this->connect->lastInsertId(), 
+            'bookmark_id' =>  $this->connect->lastInsertId(),
             );
         } else {
             $data[] = array(
@@ -184,7 +184,8 @@ class API
         return $data;
     }
 
-    public function insert_tag($inserts){
+    public function insert_tag($inserts)
+    {
         $query =   "INSERT INTO mugs.tag (tag_id,bookmark_id,name)  VALUES (?,?,?);";
         if ($statement->execute($inserts)) {
             $data[] = array(
@@ -197,6 +198,4 @@ class API
         }
         return $data;
     }
-
-    
 }
