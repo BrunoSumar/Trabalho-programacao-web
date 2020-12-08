@@ -81,19 +81,18 @@
                 const FD = new FormData(log);
                 XHR.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(XHR.response);
-                        // let r = JSON.parse(XHR.response);
-                        // let p = document.getElementById('logFeedback');
-                        // let b = document.getElementById('btnLogin');
-                        // b.style = "margin-top:0;";
-                        // p.style = "line-height:.9em";
-                        // if (r['success'] == 0) {
-                        //     p.innerHTML = "Falha ao criar conta tente novamente (tamanho mínimo = 6).";
-                        //     p.className = "alert alert-danger";
-                        // } else {
-                        //     p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail para confirmar seu login.";
-                        //     p.className = "alert alert-success";
-                        // }
+                        let r = JSON.parse(XHR.response);
+                        let p = document.getElementById('logFeedback');
+                        let b = document.getElementById('btnLogin');
+                        b.style = "margin-top:0;";
+                        p.style = "line-height:.9em";
+                        if (r['success'] == 0) {
+                            p.innerHTML = "Falha ao criar conta tente novamente (tamanho mínimo = 6).";
+                            p.className = "alert alert-danger";
+                        } else {
+                            p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail para confirmar seu login.";
+                            p.className = "alert alert-success";
+                        }
                     }
                 }
                 XHR.open("POST", "application/validateLogin.php");

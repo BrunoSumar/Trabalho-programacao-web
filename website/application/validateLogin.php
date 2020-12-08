@@ -68,7 +68,7 @@ if (isset($_POST['action'])) {
                 $_SESSION['id'] = $_POST['nickname'];
                 $_SESSION['loginNonce'] = md5(time());
                 $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];
-                print_r(sendEmail($result['email'], $link));
+                sendEmail($result['email'], $link);
             }
             echo $response;
             break;
