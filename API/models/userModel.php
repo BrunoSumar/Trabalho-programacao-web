@@ -18,7 +18,7 @@ class User
          $statement = $this->connect->prepare($query);
          $password_hash = password_hash($password, PASSWORD_BCRYPT);;
          if ($statement->execute([$nickname, $email, $password_hash])){
-            $data = array ( 'success' => '1', 'email'=> $email);
+            $data = array ( 'success' => '1', 'email'=> $email, 'id' => $this->connect->lastInsertedId());
          }else{
             $data = array ( 'success' => '0' );
          }
@@ -26,24 +26,24 @@ class User
     }
 
     public function validate_user_by_nick($nickname, $senha){
-        $query =  "SELECT password, email FROM mugs.users u WHERE u.nickname = \"$nickname\";";
+        $query =  "SELECT user_id, password, email FROM mugs.users u WHERE u.nickname = \"$nickname\";";
          $statement = $this->connect->prepare($query);
          if ($statement->execute()){
             if($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 if(password_verify($senha, $row['password']))
-                    return array('success'=>'1', 'id'=>$nickname, 'email'=>$row['email']);
+                    return array('success'=>'1', 'id'=>$row['user_id'], 'username'=>$nickname, 'email'=>$row['email']);
             }
          }
          return array('success' => '0');
     }
 
     public function validate_user_by_email($email, $senha){
-        $query =  "SELECT password, nickname FROM mugs.users u WHERE u.email = \"$email\";";
+        $query =  "SELECT user_id, password, nickname FROM mugs.users u WHERE u.email = \"$email\";";
          $statement = $this->connect->prepare($query);
          if ($statement->execute()){
             if($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 if(password_verify($senha, $row['password']))
-                    return array('success'=>'1','id'=>$row['nickname'], 'email'=>$email);
+                    return array('success'=>'1','id'=>$row['user_id'], 'username' => $row['nickname'], 'email'=>$email);
             }
          }
          return array('success' => '0');
