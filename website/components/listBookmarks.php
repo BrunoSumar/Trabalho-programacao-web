@@ -52,7 +52,7 @@ if (is_countable($result) && count($result) > 0) {
               </div>
             </div>
             <h5>
-              <span class="badge badge-light">tags...</span>
+              <!-- <span class="badge badge-light">tags...</span> -->
             </h5>
           </div>
         </div>';

@@ -10,26 +10,24 @@ include_once("./components/sessionManager.php");
 define('ARGS_URL', explode("/", isset($_GET["url"]) ? $_GET["url"] : "home"));
 
 
+
+
 // Define o html padrão caso esteja no root ou não tenha o parâmetro URL
-if (is_countable(ARGS_URL) && count(ARGS_URL)==0 || ARGS_URL == "home") {
-    $routeFile = "home.html";
-}
+    if (is_countable(ARGS_URL) && count(ARGS_URL)==0 || ARGS_URL == "home") {
+        $routeFile = "home.html";
+    } elseif (!$_SESSION['logged'] && !ARGS_URL[0] == "newuser") {
+        $routeFile = "controllers/login.php";
+    } elseif (is_countable(ARGS_URL) && count(ARGS_URL) > 0) {
+        $routeFile = "controllers/".ARGS_URL[0].".php";
+    }
 
 
-// Chama o respectivo controller
-if (is_countable(ARGS_URL) && count(ARGS_URL) > 0) {
-    $routeFile .= "controllers/".ARGS_URL[0].".php";
-}
-
-
-// Chama o arquivo caso exista, caso não retorna o html padrão
-if (file_exists($routeFile)) {
-    require_once $routeFile;
-} else {
-    require_once "home.html";
-}
-
-
+    // Chama o arquivo caso exista, caso não retorna o html padrão
+    if (file_exists($routeFile)) {
+        require_once $routeFile;
+    } else {
+        require_once "home.html";
+    }
 
 
 

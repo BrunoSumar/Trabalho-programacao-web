@@ -5,10 +5,12 @@
 if (isset($_POST["action"])) {
     switch ($_POST["action"]) {
         case 'insert':
+            print_r($_POST);
             $form_data = array(
                 'title' => $_POST['titleBookmark'],
                 'notes' => $_POST['notesBookmark'],
                 'url' => $_POST['urlBookmark'],
+                'tags' => $_POST['tags'],
                 'isPublic' => isset($_POST['isPublic']) ? 1:0
             );
             // print_r ($form_data);

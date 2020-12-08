@@ -120,6 +120,11 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="form-floating">
+                                <textarea placeholder="Insira as tags separadas por espaço" type="text" class="form-control" id="tags" name="tags" required="" style="height: 100px" rows="8" cols="80"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <p id="creation_date" for="message-text" class="bookmarkForm"></p>
                         </div>
                         <div class="modal-footer">
@@ -184,23 +189,6 @@
                 XHR.send(FD);
             }
 
-            // function is_update() {
-            //     let xmlhttp = new XMLHttpRequest();
-            //     xmlhttp.onreadystatechange = function() {
-            //         if (this.readyState == 4 && this.status == 200) {
-            //             atual = this.responseText;
-            //         }
-            //     };
-            //     xmlhttp.open("GET", "../API/testedb.php?action=4", true);
-            //     xmlhttp.send();
-
-            //     if (version === atual)
-            //         return true;
-
-            //     version = atual;
-            //     return false;
-
-            // }
 
             function listBookmars() {
                 let xmlhttp = new XMLHttpRequest();
@@ -231,7 +219,7 @@
 
             async function loop() {
                 while (true) {
-                    await new Promise(_ => setTimeout(_, 1000));
+                    await new Promise(_ => setTimeout(_, 5000));
                     //if (!is_update())
                     {
                         console.log('.');
@@ -258,6 +246,7 @@
                                 document.getElementById('isPublic').checked = data['is_private'] === '1' ? false : true;
                                 document.getElementById('creation_date').innerHTML = `<b>Create:</b> ${data['creation_date']}`;
                                 document.getElementById('action').value = 'update';
+                                document.getElementById('tags').value = null;
                             }
                         }
                         let data = `action=fetch_one_by_id&id=${this.id}`;
@@ -293,53 +282,6 @@
                 }
             }
 
-            //Vou analisar no futuro
-            {
-                function postAjax(url, data, success) {
-                    var params = typeof data == 'string' ? data : Object.keys(data).map(
-                        function(k) {
-                            return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
-                        }
-                    ).join('&');
-
-                    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-                    xhr.open('POST', url);
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState > 3 && xhr.status == 200) {
-                            success(xhr.responseText);
-                        }
-                    };
-                    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.send(params);
-                    return xhr;
-                }
-                // example request
-                // postAjax("application/validateBookmark.php", 'p1=1&p2=Hello+World', function(data) {
-                //     console.log(data);
-                // });
-
-                // example request with data object
-                // postAjax("application/validateBookmark.php", {
-                //     p1: 1,
-                //     p2: 'Hello World'
-                // }, function(data) {
-                //     console.log(data);
-                // });
-
-            }
-
-            // let data1 = {
-            //     oi: 1,
-            //     oi2: 32
-            // };
-            // var params = typeof data1 == 'string' ? data1 : Object.entries(data1).map(
-            //     function(k) {
-            //         return encodeURIComponent(k[0]) + '=' + encodeURIComponent(k[1])
-            //     }
-            // ).join('&');
-            // console.log(params);
-
             addButton.onclick = function() {
                 //console.log('add');
                 document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Bookmark';
@@ -349,6 +291,7 @@
                 document.getElementById('urlBookmark').value = null;
                 document.getElementById('hidden_id').value = null;
                 document.getElementById('isPublic').checked = true;
+                document.getElementById('tags').value = null;
                 document.getElementById('action').value = 'insert';
                 return false;
             };

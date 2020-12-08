@@ -19,83 +19,82 @@
     <div class="">
 
 
-    <div class="container-fluid h-100  text-light">
-      <div class="row h-100 pTB">
-        <div class="col-lg order-12">
-          <div class="caixa shadow-lg pb-4">
-            <div class="container pb-4 text-center">
-              <a href="index.html"> <img class="img-fluid" src="svg/isologo.svg" alt=""></a>
-            </div>
-            <hr>
-            <div class="container  h-50 text-center">
-              <p>
-                Explore, salve, compartilhe <span class="text-rosa">centenas</span> de links cadastrados por nossos usuários!
-              </p>
-              <p>Caso ainda não tenha uma conta considere se registrar para aproveitar ao máximo o <span class="text-rosa">MUGS</span>.</p>
-              <button class="btn btn-block gradient-azul borderless text-light font-weight-bold p-2 btn-registro" type="button">Registre-se</button>
+        <div class="container-fluid h-100  text-light">
+            <div class="row h-100 pTB">
+                <div class="col-lg order-12">
+                    <div class="caixa shadow-lg pb-4">
+                        <div class="container pb-4 text-center">
+                            <a href="index.html"> <img class="img-fluid" src="svg/isologo.svg" alt=""></a>
+                        </div>
+                        <hr>
+                        <div class="container  h-50 text-center">
+                            <p>
+                                Explore, salve, compartilhe <span class="text-rosa">centenas</span> de links cadastrados por nossos usuários!
+                            </p>
+                            <p>Caso ainda não tenha uma conta considere se registrar para aproveitar ao máximo o <span class="text-rosa">MUGS</span>.</p>
+                            <a href="   /UFF/Trabalho-programacao-web1/website/newuser"><button class="btn btn-block gradient-azul borderless text-light font-weight-bold p-2 btn-registro" type="button">Registre-se</button></a>
 
                         </div>
                     </div>
                 </div>
 
 
-        <div class="col-lg order-lg-last">
-          <div class="caixa shadow-lg">
-              <h3>LOGIN</h3>
-              <hr>
-            <form id="logForm" onsubmit="login(); return false;">
-              <div class="form-group">
-                <label class="form-text" for="inputNome">Nome de usuário:</label>
-                <input type="text" class="form-control inputLogin" id="inputNome" name="identifier" placeholder="Nome de usuário ou E-mail">
-              </div>
+                <div class="col-lg order-lg-last">
+                    <div class="caixa shadow-lg">
+                        <h3>LOGIN</h3>
+                        <hr>
+                        <form id="logForm" onsubmit="login(); return false;">
+                            <div class="form-group">
+                                <label class="form-text" for="inputNome">Nome de usuário:</label>
+                                <input type="text" class="form-control inputLogin" id="inputNome" name="identifier" placeholder="Nome de usuário ou E-mail">
+                            </div>
 
-              <div class="form-group">
-                <label for="inputSenha">Senha:</label>
-                <input type="password" class="form-control inputLogin" id="inputSenha" name="password" placeholder="Digite sua senha">
+                            <div class="form-group">
+                                <label for="inputSenha">Senha:</label>
+                                <input type="password" class="form-control inputLogin" id="inputSenha" name="password" placeholder="Digite sua senha">
 
-              </div>
-            
-              <div style="display:none" id="logFeedback" class="alert alert-danger"></div>
+                            </div>
 
-              <div class="form-group">
-                <button type="submit" class="btn btn-block gradient-rosa borderless text-light font-weight-bold  p-2 btn-login" type="button">Entrar</button>
-              </div>
-              <input type="hidden" name="action" id="action" value="validate">
-            </form>
-            <hr>
-            <div><i  class="fab fa-facebook-square fa-3x"></i></div>
-          </div>
+                            <div style="display:none" id="logFeedback" class="alert alert-danger"></div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-block gradient-rosa borderless text-light font-weight-bold  p-2 btn-login" type="button">Entrar</button>
+                            </div>
+                            <input type="hidden" name="action" id="action" value="validate">
+                        </form>
+                        <hr>
+                        <div><i class="fab fa-facebook-square fa-3x"></i></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
 
-    <script type="text/javascript">
-        const login = () => {
-            let log = document.getElementById('logForm');
+        <script type="text/javascript">
+            const login = () => {
+                let log = document.getElementById('logForm');
 
-            const XHR = new XMLHttpRequest();
-            const FD = new FormData(log);
-            XHR.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // console.log(XHR.response);
-                    let r = JSON.parse(XHR.response);
-                    let p = document.getElementById('logFeedback');
-                    p.style = "";
-                    if(r['success']==0){
-                        p.innerHTML = "Usuário ou senha inválidos.";
-                        p.className ="alert alert-danger";
-                    }else{
-                        p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail.";
-                        p.className ="alert alert-success";
+                const XHR = new XMLHttpRequest();
+                const FD = new FormData(log);
+                XHR.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // console.log(XHR.response);
+                        let r = JSON.parse(XHR.response);
+                        let p = document.getElementById('logFeedback');
+                        p.style = "";
+                        if (r['success'] == 0) {
+                            p.innerHTML = "Usuário ou senha inválidos.";
+                            p.className = "alert alert-danger";
+                        } else {
+                            p.innerHTML = "Para sua segurança acesse o link enviado ao seu E-mail.";
+                            p.className = "alert alert-success";
+                        }
                     }
                 }
+                XHR.open("POST", "application/validateLogin.php");
+                XHR.send(FD);
             }
-            XHR.open("POST", "application/validateLogin.php");
-            XHR.send(FD);
-        }
-        
-    </script>
+        </script>
 
         <script type="text/javascript" src="/UFF/Trabalho-programacao-web1/website/js/router.js"></script>
         <script type="text/javascript" src="/UFF/Trabalho-programacao-web1/website/js/routes.js"></script>
