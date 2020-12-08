@@ -14,7 +14,7 @@ function httpPost($url, $data)
     return $response;
 }
 
-public function sendEmail($email,$link)
+function sendEmail($email, $link)
 {
     return  httpPost("http://localhost/UFF/Trabalho-programacao-web1/API/PHPMailer-master/index.php", array('link' =>  $link, 'email' => $email));
 }
@@ -41,8 +41,8 @@ if (isset($_POST['action'])) {
             if ($result['success'] == '1') {
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['loginNonce'] = md5(time());
-                //Enviar aqui email com link para usuário
                 $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];
+                sendEmail($result['email'], $link);
             }
             echo $response;
             break;
@@ -62,12 +62,13 @@ if (isset($_POST['action'])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
-            print_r($result);
 
+            
             if ($result['success'] == '1') {
                 $_SESSION['id'] = $_POST['nickname'];
                 $_SESSION['loginNonce'] = md5(time());
-                $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];                
+                $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];
+                print_r(sendEmail($result['email'], $link));
             }
             echo $response;
             break;

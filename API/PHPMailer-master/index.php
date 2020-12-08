@@ -16,6 +16,7 @@ $mail->IsSMTP();
 $mail->Port = '465'; //porta usada pelo gmail.
 $mail->Host = 'smtp.gmail.com';
 $mail->IsHTML(true);
+$mail ->charSet = "utf-8";
 $mail->Mailer = 'smtp';
 $mail->SMTPSecure = 'ssl';
 
@@ -27,16 +28,16 @@ $mail->Password = 'mugsbrabo'; // senha do email.
 $mail->SingleTo = true;
 
 // configuração do email a ver enviado.
-$mail->From = "stevemberg100@gmail.com";
-$mail->FromName = "Nome do remetente.";
+$mail->From = $_POST['email'];
+$mail->FromName = "Login MUGS";
 
-$mail->addAddress("stevemberg100@gmail.com"); // email do destinatario.
+$mail->addAddress($_POST['email']); // email do destinatario.
 
-$mail->Subject = "Aqui vai o assunto do email, pode vim atraves de variavel.";
-$mail->Body = "Aqui vai a mensagem, que tambem pode vim por variavel.";
+$mail->Subject = "Confirme seu Login!";
+$mail->Body = "Clique no link a seguir para validar seu login<br>".$_POST['link'];
 
-// if (!$mail->Send()) {
-//     echo "Erro ao enviar Email:" . $mail->ErrorInfo;
-// }else{
-//     echo "Tudo certo"
-// }
+if (!$mail->Send()) {
+    echo "Erro ao enviar Email:" . $mail->ErrorInfo;
+} else {
+    echo "Tudo certo";
+}
