@@ -19,6 +19,7 @@ if(isset($_POST['action'])){
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
+            // print_r($result);
 
             if ($result['success'] == '1') {
                 $_SESSION['id'] = $result['id'];
@@ -44,6 +45,7 @@ if(isset($_POST['action'])){
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
+            print_r($result);
 
             if ($result['success'] == '1') {
                 $_SESSION['id'] = $_POST['nickname'];

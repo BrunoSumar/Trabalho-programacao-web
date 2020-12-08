@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Trending 
 {
     private $connect = '';
     private $data = '';
@@ -19,7 +19,6 @@ class User
                    WHERE is_private=0
                    ORDER BY creation_date DESC
                    limit 0,10;";
-        echo $query;
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
             $data = null;
@@ -38,7 +37,6 @@ class User
                    WHERE b.is_private=0
                    ORDER BY b.creation_date DESC
                    limit 0,10;";
-        echo $query;
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
             $data = null;
@@ -58,7 +56,6 @@ class User
                    and b.creation_date < CURRENT_DATE-7
                    ORDER BY b.creation_date DESC
                    limit 0,10 ";
-        echo $query;
         $statement = $this->connect->prepare($query);
         if ($statement->execute()) {
             $data = null;

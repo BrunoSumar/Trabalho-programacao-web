@@ -18,7 +18,7 @@ class User
          $statement = $this->connect->prepare($query);
          $password_hash = password_hash($password, PASSWORD_BCRYPT);;
          if ($statement->execute([$nickname, $email, $password_hash])){
-            $data = array ( 'success' => '1' );
+            $data = array ( 'success' => '1', 'email'=> $email);
          }else{
             $data = array ( 'success' => '0' );
          }

@@ -64,7 +64,7 @@
               <div style="display:none" id="logFeedback" class="alert alert-danger"></div>
 
               <div class="form-group">
-                <button onclick="login()" class="btn btn-block gradient-azul borderless text-light font-weight-bold  p-2 btn-login" type="submit" id="btnLogin">Cadastrar-se</button>
+                <button class="btn btn-block gradient-azul borderless text-light font-weight-bold  p-2 btn-login" type="submit" id="btnLogin">Cadastrar-se</button>
               </div>
               <input type="hidden" name="action" id="action" value="create">
             </form>
@@ -81,6 +81,7 @@
             const FD = new FormData(log);
             XHR.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
+                    console.log("XHR.response");
                     let r = JSON.parse(XHR.response);
                     let p = document.getElementById('logFeedback');
                     let b = document.getElementById('btnLogin');
