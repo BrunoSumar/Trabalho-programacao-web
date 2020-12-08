@@ -1,4 +1,7 @@
 <?php
+
+print_r($_POST);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 

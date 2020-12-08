@@ -7,11 +7,16 @@ function httpPost($url, $data)
 {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($curl);
     curl_close($curl);
     return $response;
+}
+
+public function sendEmail($email,$link)
+{
+    return  httpPost("http://localhost/UFF/Trabalho-programacao-web1/API/PHPMailer-master/index.php", array('link' =>  $link, 'email' => $email));
 }
 
 if (isset($_POST['action'])) {
@@ -56,11 +61,12 @@ if (isset($_POST['action'])) {
             $response = curl_exec($client);
             curl_close($client);
             $result = json_decode($response, true);
-
-            if ($result['success'] == '1') {
+            
+            
+             if ($result['success'] == '1') {
                 $_SESSION['id'] = $_POST['nickname'];
                 $_SESSION['loginNonce'] = md5(time());
-                $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];
+                $link = "http://localhost/UFF/Trabalho-programacao-web1/website/validatelogin/".$_SESSION['loginNonce'];                
             }
             echo $response;
             break;
