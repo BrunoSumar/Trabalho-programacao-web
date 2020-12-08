@@ -28,6 +28,7 @@ if (isset($_POST["action"])) {
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Inserted';
+                    $_SESSION['MBversion']=md5(1.3*time());
                 } else {
                     echo 'Insert error';
                 }
@@ -71,6 +72,7 @@ if (isset($_POST["action"])) {
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Updated';
+                    $_SESSION['MBversion']=md5(1.3*time());
                 } else {
                     echo 'Update error';
                 }
@@ -92,10 +94,18 @@ if (isset($_POST["action"])) {
             foreach ($result as $keys => $values) {
                 if ($result[$keys]['success'] == '1') {
                     echo 'Deleted';
+                    $_SESSION['MBversion']=md5(1.3*time());
                 } else {
                     echo 'Delete error';
                 }
             }
+            break;
+
+        case 'is_update':
+            if(!isset($_SESSION['MBversion'])){
+                $_SESSION['MBversion']=md5(1.3*time());
+            }
+            echo $_SESSION['MBversion'];
             break;
 
 
