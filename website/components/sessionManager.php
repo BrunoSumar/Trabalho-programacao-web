@@ -1,7 +1,8 @@
 <?php
 
-if(!(defined('INDEX_LOAD') && INDEX_LOAD == 1)) // Verifica se chamada veio de index.php
+if (!(defined('INDEX_LOAD') && INDEX_LOAD == 1)) { // Verifica se chamada veio de index.php
     exit("Acesso inválido.");
+}
 
 // Inicia sessão
 session_start();
@@ -16,8 +17,8 @@ session_start();
  *
 /*/
 
-if(!isset($_SESSION['logged']) || $_SESSION['logged']=false){
+
+if (!isset($_SESSION['logged']) || $_SESSION['logged']==false) {
     $_SESSION['logged']=false;
     $_SESSION['id']=null;
 }
-
