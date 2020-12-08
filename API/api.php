@@ -114,14 +114,14 @@ class API
         $statement = $this->connect->prepare($query);
         if ($statement->execute($inserts)) {
             $data[] = array(
-            'success' => '1'
+            'success' => '1',
+            'bookmark_id' =>  $this->connect->lastInsertId(), 
             );
         } else {
             $data[] = array(
             'success' => '0'
             );
         }
-        $this->update_version();
         return $data;
     }
 
@@ -169,4 +169,20 @@ class API
         $this->update_version();
         return $data;
     }
+
+    public function insert_tag($inserts){
+        $query =   "INSERT INTO mugs.tag (tag_id,bookmark_id,name)  VALUES (?,?,?);";
+        if ($statement->execute($inserts)) {
+            $data[] = array(
+            'success' => '1'
+            );
+        } else {
+            $data[] = array(
+            'success' => '0'
+            );
+        }
+        return $data;
+    }
+
+    
 }

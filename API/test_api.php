@@ -17,7 +17,7 @@ if ($_GET["action"] == 'insert') {
         'email' => $_POST['email'],
         'password' => $_POST['password'],
     );
-    $data = $form_data;
+    $data = $api_object->insert_bookmarks($form_data);
 }
 
 if ($_GET["action"] == 'fetch_all_bookmarks') {
